@@ -3,73 +3,105 @@
 ## Overview
 This project contains 150 LeetCode-style problems with method signatures only. Each problem has the class structure and method signature ready for you to implement the logic.
 
+## Current Status: ~50+ problems created (out of 150)
+
 ## Project Structure
 
 ```
 leetcode-150/
 ├── src/main/java/com/harshit/leetcode/
-│   ├── arrays/
-│   │   ├── TwoSum.java
-│   │   ├── BestTimeToBuyAndSellStock.java
-│   │   └── ... (30+ array problems)
-│   ├── strings/
-│   │   ├── ValidAnagram.java
-│   │   ├── LongestSubstringWithoutRepeatingCharacters.java
-│   │   └── ... (20+ string problems)
-│   ├── linkedlist/
-│   │   ├── ReverseLinkedList.java
-│   │   ├── MergeTwoSortedLists.java
-│   │   └── ... (15+ linked list problems)
-│   ├── trees/
-│   │   ├── MaximumDepthOfBinaryTree.java
-│   │   ├── ValidateBinarySearchTree.java
-│   │   └── ... (25+ tree problems)
-│   ├── dynamicprogramming/
-│   │   ├── ClimbingStairs.java
-│   │   ├── HouseRobber.java
-│   │   └── ... (20+ DP problems)
-│   ├── backtracking/
-│   │   ├── GenerateParentheses.java
-│   │   ├── CombinationSum.java
-│   │   └── ... (10+ backtracking problems)
-│   ├── graphs/
-│   │   ├── NumberOfIslands.java
-│   │   ├── CloneGraph.java
-│   │   └── ... (15+ graph problems)
-│   └── misc/
-│       ├── LRUCache.java
-│       ├── DesignTwitter.java
-│       └── ... (15+ miscellaneous problems)
+│   ├── arrays/              (10+ problems)
+│   ├── strings/             (5+ problems)
+│   ├── twopointers/         (5+ problems)
+│   ├── slidingwindow/       (5+ problems)
+│   ├── stack/               (5+ problems)
+│   ├── binarysearch/        (5+ problems)
+│   ├── linkedlist/          (5+ problems)
+│   ├── trees/               (10+ problems)
+│   ├── dynamicprogramming/  (10+ problems)
+│   ├── backtracking/        (5+ problems)
+│   ├── graphs/              (5+ problems)
+│   ├── heap/                (5+ problems)
+│   ├── tries/               (2+ problems)
+│   ├── greedy/              (2+ problems)
+│   ├── intervals/           (2+ problems)
+│   ├── bitmanipulation/     (2+ problems)
+│   └── math/                (2+ problems)
 └── README.md
 ```
 
 ## How to Use
 
 1. **Choose a problem** from any category
-2. **Read the problem description** in the class comments
-3. **Implement the logic** in the method body
-4. **Test your solution** with the provided test cases (if any)
+2. **Read the problem description** in the class JavaDoc comments
+3. **Implement the logic** in the method body (look for "Write your logic here")
+4. **Run the main method** to test your solution
+5. **Compare** your output with expected output
 
-## Problem Categories
+## Problem Features
 
-- **Arrays & Hashing**: 30+ problems
-- **Two Pointers**: 10+ problems
-- **Sliding Window**: 10+ problems
-- **Stack**: 10+ problems
-- **Binary Search**: 10+ problems
-- **Linked List**: 15+ problems
-- **Trees**: 25+ problems
-- **Tries**: 5+ problems
-- **Heap/Priority Queue**: 10+ problems
-- **Backtracking**: 10+ problems
-- **Graphs**: 15+ problems
-- **Advanced Graphs**: 5+ problems
-- **1-D Dynamic Programming**: 10+ problems
-- **2-D Dynamic Programming**: 10+ problems
-- **Greedy**: 5+ problems
-- **Intervals**: 5+ problems
-- **Math & Geometry**: 5+ problems
-- **Bit Manipulation**: 5+ problems
+Each problem includes:
+- ✅ **Problem description** with examples in JavaDoc
+- ✅ **Method signature(s)** ready to implement
+- ✅ **"Write your logic here"** comments with hints
+- ✅ **Main method** with 2-3 test cases
+- ✅ **Expected outputs** for each test case
+- ✅ **Helper methods** where needed (for trees, linked lists, etc.)
+
+## Categories Covered
+
+### Arrays & Hashing
+- TwoSum, ContainsDuplicate, ProductOfArrayExceptSelf
+- MaximumSubarray, GroupAnagrams, TopKFrequentElements
+- LongestConsecutiveSequence, ValidSudoku, TrappingRainWater
+- And more...
+
+### Two Pointers
+- ValidPalindrome, TwoSumII, ThreeSum, ContainerWithMostWater
+
+### Sliding Window
+- LongestSubstringWithoutRepeatingCharacters
+- MinimumWindowSubstring, SlidingWindowMaximum
+
+### Stack
+- ValidParentheses, DailyTemperatures, LargestRectangleInHistogram
+
+### Binary Search
+- BinarySearch, SearchInRotatedSortedArray
+
+### Linked List
+- ReverseLinkedList, MergeTwoSortedLists, ReorderList
+
+### Trees
+- MaximumDepthOfBinaryTree, ValidateBinarySearchTree
+- SameTree, SubtreeOfAnotherTree
+
+### Dynamic Programming
+- ClimbingStairs, HouseRobber, CoinChange, LongestIncreasingSubsequence
+
+### Backtracking
+- GenerateParentheses, CombinationSum, Permutations, Subsets, WordSearch
+
+### Graphs
+- NumberOfIslands, CloneGraph
+
+### Heap/Priority Queue
+- KthLargestElement, MergeKSortedLists
+
+### Tries
+- ImplementTrie
+
+### Greedy
+- JumpGame
+
+### Intervals
+- MergeIntervals
+
+### Bit Manipulation
+- SingleNumber
+
+### Math
+- HappyNumber
 
 ## Note
 
@@ -77,4 +109,16 @@ leetcode-150/
 - Problem descriptions are in class-level JavaDoc comments
 - Method signatures match LeetCode's expected format
 - No solutions provided - this is for practice!
+- Main methods help you test your solutions immediately
 
+## Next Steps
+
+1. Start implementing problems category by category
+2. Run main methods to test your solutions
+3. Compare with expected outputs
+4. Practice explaining your approach (for interviews)
+
+## Remaining Problems
+
+See `CREATE_REMAINING_PROBLEMS.md` for the list of remaining problems to be created.
+The goal is to reach 150 problems covering all major topics.
