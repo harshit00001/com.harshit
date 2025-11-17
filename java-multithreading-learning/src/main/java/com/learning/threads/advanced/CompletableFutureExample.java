@@ -157,8 +157,7 @@ public class CompletableFutureExample {
         System.out.println("Result: " + handled.get());
         
         // Interview Point: handle() for both success and error
-        CompletableFuture<String> handled2 = CompletableFuture
-            .supplyAsync(() -> {
+        CompletableFuture<Object> handled2 = CompletableFuture.supplyAsync(() -> {
                 throw new RuntimeException("Error!");
             })
             .handle((result, ex) -> {
