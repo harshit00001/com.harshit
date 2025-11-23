@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Controller vs @RestController - Complete Comparison
  * 
@@ -83,6 +86,12 @@ class WebController {
 @RequestMapping("/api")
 class RestApiController {
     
+    private final ProductService productService;
+    
+    public RestApiController(ProductService productService) {
+        this.productService = productService;
+    }
+    
     /**
      * REST API EXAMPLE
      * 
@@ -107,6 +116,7 @@ class RestApiController {
 }
 
 // Helper classes
+@Component
 class ProductService {
     public void addProduct(ProductDTO product) {
         // Add product logic
