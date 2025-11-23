@@ -1,6 +1,6 @@
 package com.harshit.demo;
 
-import com.harshit.demo.performance.PerformanceOptimizedService;
+import com.harshit.demo.service.StepByStepDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,25 +14,40 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class SpringBootAdvancedDemoApplication implements CommandLineRunner {
 
     @Autowired
-    private PerformanceOptimizedService performanceService;
+    private StepByStepDemoService demoService;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootAdvancedDemoApplication.class, args);
     }
 
     @Override
+    @org.springframework.core.annotation.Order(2)
     public void run(String... args) throws Exception {
-        System.out.println("\n=========================================");
-        System.out.println("🚀 Spring Boot Performance Demo Started!");
-        System.out.println("=========================================");
-        System.out.println("📊 Actuator: http://localhost:8080/actuator");
-        System.out.println("💚 Health: http://localhost:8080/actuator/health");
-        System.out.println("📈 Metrics: http://localhost:8080/actuator/metrics");
-        System.out.println("=========================================\n");
+        System.out.println("\n" + "=".repeat(70));
+        System.out.println("🚀 SPRING BOOT PERFORMANCE OPTIMIZATION DEMO");
+        System.out.println("=".repeat(70));
+        System.out.println("\n📚 Available Endpoints:");
+        System.out.println("   GET  /api/demo/cache/{id}              - Caching demonstration");
+        System.out.println("   POST /api/demo/async?email=test@ex.com - Async processing");
+        System.out.println("   GET  /api/demo/pagination?page=0&size=10 - Pagination");
+        System.out.println("   GET  /api/demo/connection-pool         - Connection pooling");
+        System.out.println("   GET  /api/demo/lazy-loading            - Lazy loading");
+        System.out.println("   GET  /api/demo/cache-operations/{id}   - Cache operations");
+        System.out.println("   GET  /api/demo/all                     - All strategies");
+        System.out.println("\n📊 Monitoring:");
+        System.out.println("   http://localhost:8080/actuator");
+        System.out.println("   http://localhost:8080/actuator/health");
+        System.out.println("   http://localhost:8080/actuator/metrics");
+        System.out.println("\n" + "=".repeat(70));
+        System.out.println("\n⏳ Starting automatic demonstration in 3 seconds...\n");
         
-        // Run performance demonstration
-        Thread.sleep(2000); // Wait for application to fully start
-        performanceService.demonstratePerformance();
+        Thread.sleep(3000);
+        
+        // Run complete step-by-step demonstration
+        demoService.demonstrateAllStrategies();
+        
+        System.out.println("\n✅ Application ready! Use the endpoints above to see each strategy in action.");
+        System.out.println("💡 Tip: Call the same endpoint multiple times to see caching in action!\n");
     }
 }
 
