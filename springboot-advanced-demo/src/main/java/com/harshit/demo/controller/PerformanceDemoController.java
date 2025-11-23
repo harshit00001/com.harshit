@@ -1,12 +1,15 @@
 package com.harshit.demo.controller;
 
+import com.harshit.demo.entity.User;
 import com.harshit.demo.performance.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -136,27 +139,59 @@ public class PerformanceDemoController {
         System.out.println("=========================================");
         System.out.println("Requesting page: " + page + ", size: " + size);
         
-        long startTime = System.currentTimeMillis();
-        var pageResult = queryOptimization.getUsersPaginated(page, size);
-        long endTime = System.currentTimeMillis();
-        long duration = endTime - startTime;
-        
-        response.put("strategy", "Database Query Optimization - Pagination");
-        response.put("page", page);
-        response.put("size", size);
-        response.put("totalElements", pageResult.getTotalElements());
-        response.put("totalPages", pageResult.getTotalPages());
-        response.put("currentPageSize", pageResult.getContent().size());
-        response.put("duration", duration + "ms");
-        response.put("explanation", "✅ Only loaded " + pageResult.getContent().size() + 
-            " records out of " + pageResult.getTotalElements() + " total");
-        response.put("benefit", "Memory efficient - doesn't load all records into memory");
-        response.put("tip", "Try different page numbers: ?page=1&size=5");
-        
-        System.out.println("Loaded: " + pageResult.getContent().size() + " users");
-        System.out.println("Total: " + pageResult.getTotalElements() + " users");
-        System.out.println("Duration: " + duration + "ms");
-        System.out.println("=========================================\n");
+        try {
+            long startTime = System.currentTimeMillis();
+            var pageResult = queryOptimization.getUsersPaginated(page, size);
+            long endTime = System.currentTimeMillis();
+            long duration = endTime - startTime;
+            
+            // Prepare user data for response
+            List<Map<String, Object>> users = new ArrayList<>();
+            for (User user : pageResult.getContent()) {
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("id", user.getId());
+                userData.put("name", user.getName());
+                userData.put("email", user.getEmail());
+                users.add(userData);
+            }
+            
+            response.put("strategy", "Database Query Optimization - Pagination");
+            response.put("page", page);
+            response.put("size", size);
+            response.put("totalElements", pageResult.getTotalElements());
+            response.put("totalPages", pageResult.getTotalPages());
+            response.put("currentPageSize", pageResult.getContent().size());
+            response.put("users", users);
+            response.put("duration", duration + "ms");
+            response.put("explanation", "✅ Only loaded " + pageResult.getContent().size() + 
+                " records out of " + pageResult.getTotalElements() + " total");
+            response.put("benefit", "Memory efficient - doesn't load all records into memory");
+            response.put("tip", "Try different page numbers: ?page=1&size=5");
+            
+            if (pageResult.getTotalElements() == 0) {
+                response.put("warning", "No data found. Make sure DataInitializer has created test users.");
+            }
+            
+            System.out.println("Loaded: " + pageResult.getContent().size() + " users");
+            System.out.println("Total: " + pageResult.getTotalElements() + " users");
+            System.out.println("Duration: " + duration + "ms");
+            
+            // Show first few user names
+            if (!pageResult.getContent().isEmpty()) {
+                System.out.println("Sample users on this page:");
+                pageResult.getContent().stream()
+                    .limit(5)
+                    .forEach(user -> System.out.println("   - " + user.getName() + " (ID: " + user.getId() + ")"));
+            }
+            
+            System.out.println("=========================================\n");
+            
+        } catch (Exception e) {
+            response.put("error", "Pagination failed: " + e.getMessage());
+            response.put("strategy", "Database Query Optimization - Pagination");
+            System.err.println("❌ Error: " + e.getMessage());
+            e.printStackTrace();
+        }
         
         return ResponseEntity.ok(response);
     }

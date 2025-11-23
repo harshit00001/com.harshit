@@ -35,12 +35,29 @@ public class QueryOptimizationExample {
      */
     @Transactional(readOnly = true)
     public Page<User> getUsersPaginated(int page, int size) {
-        // Create Pageable with sorting
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
-        
-        // Only loads requested page (e.g., page 0, size 10 = first 10 records)
-        // Doesn't load all users into memory
-        return userRepository.findAll(pageable);
+        try {
+            // Create Pageable with sorting by ID (always exists)
+            // If you want to sort by name, ensure all users have names
+            Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
+            
+            // Only loads requested page (e.g., page 0, size 10 = first 10 records)
+            // Doesn't load all users into memory
+            Page<User> result = userRepository.findAll(pageable);
+            
+            System.out.println("   📊 Pagination Query Executed:");
+            System.out.println("      - Page: " + page);
+            System.out.println("      - Size: " + size);
+            System.out.println("      - Total Elements: " + result.getTotalElements());
+            System.out.println("      - Total Pages: " + result.getTotalPages());
+            System.out.println("      - Current Page Size: " + result.getContent().size());
+            
+            return result;
+        } catch (Exception e) {
+            System.err.println("❌ Pagination Error: " + e.getMessage());
+            e.printStackTrace();
+            // Return empty page on error
+            return Page.empty();
+        }
     }
     
     /**

@@ -146,14 +146,28 @@ public class StepByStepDemoService {
         System.out.println("   → Request: Page 0, Size 10");
         System.out.println("   → Only loads 10 records");
         
-        long start = System.currentTimeMillis();
-        var page = queryOptimization.getUsersPaginated(0, 10);
-        long duration = System.currentTimeMillis() - start;
-        
-        System.out.println("   ✅ Loaded: " + page.getContent().size() + " records");
-        System.out.println("   ✅ Total available: " + page.getTotalElements() + " records");
-        System.out.println("   ✅ Total pages: " + page.getTotalPages());
-        System.out.println("   ⏱️  Time: " + duration + "ms");
+        try {
+            long start = System.currentTimeMillis();
+            var page = queryOptimization.getUsersPaginated(0, 10);
+            long duration = System.currentTimeMillis() - start;
+            
+            System.out.println("   ✅ Loaded: " + page.getContent().size() + " records");
+            System.out.println("   ✅ Total available: " + page.getTotalElements() + " records");
+            System.out.println("   ✅ Total pages: " + page.getTotalPages());
+            System.out.println("   ⏱️  Time: " + duration + "ms");
+            
+            if (page.getTotalElements() == 0) {
+                System.out.println("   ⚠️  No data found. DataInitializer should create test users on startup.");
+            } else {
+                System.out.println("   📋 Sample users:");
+                page.getContent().stream()
+                    .limit(3)
+                    .forEach(user -> System.out.println("      - " + user.getName()));
+            }
+        } catch (Exception e) {
+            System.out.println("   ❌ Error: " + e.getMessage());
+            e.printStackTrace();
+        }
         
         System.out.println("\nSTEP 3: Memory Efficiency");
         System.out.println("   → Memory used: Only for 10 records");
