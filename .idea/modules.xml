@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JavaCoding/Amdocs.iml" filepath="$PROJECT_DIR$/JavaCoding/Amdocs.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/com.harshit.iml" filepath="$PROJECT_DIR$/.idea/com.harshit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-advanced-demo/springboot-advanced-demo.iml" filepath="$PROJECT_DIR$/springboot-advanced-demo/springboot-advanced-demo.iml" />
     </modules>
   </component>
 </project>
