@@ -7,10 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Amdocs" />
+        <module name="springboot-advanced-demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Amdocs" target="17" />
+      <module name="springboot-advanced-demo" target="11" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="springboot-advanced-demo" options="-parameters" />
+    </option>
   </component>
 </project>
