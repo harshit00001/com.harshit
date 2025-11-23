@@ -4,9 +4,17 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
+/**
+ * User Entity - Demonstrates LAZY loading
+ * 
+ * STRATEGY 2: LAZY LOADING
+ * Always use FetchType.LAZY for relationships to avoid N+1 query problem
+ */
 @Entity
 @Table(name = "users")
+@NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name")
 public class User {
     
     @Id
@@ -24,6 +32,21 @@ public class User {
     private String email;
     
     private Integer age;
+    
+    /**
+     * LAZY LOADING EXAMPLE
+     * @OneToMany with FetchType.LAZY
+     * Orders are only loaded when you access user.getOrders()
+     * 
+     * If you used FetchType.EAGER:
+     * - Loading 100 users would execute 1 query for users + 100 queries for orders = 101 queries
+     * 
+     * With FetchType.LAZY:
+     * - Loading 100 users executes only 1 query
+     * - Orders are loaded only when accessed
+     */
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<com.harshit.demo.entity.Order> orders;
     
     public User() {}
     
@@ -44,5 +67,8 @@ public class User {
     
     public Integer getAge() { return age; }
     public void setAge(Integer age) { this.age = age; }
+    
+    public List<com.harshit.demo.entity.Order> getOrders() { return orders; }
+    public void setOrders(List<com.harshit.demo.entity.Order> orders) { this.orders = orders; }
 }
 

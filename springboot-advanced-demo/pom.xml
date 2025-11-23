@@ -18,7 +18,7 @@
     <packaging>jar</packaging>
 
     <name>Spring Boot Advanced Demo</name>
-    <description>Spring Boot Advanced Topics Demo - Performance, Annotations, and More with Code Examples</description>
+    <description>Spring Boot Performance Optimization Demo - Interview Question 1 with Code Examples</description>
 
     <properties>
         <java.version>11</java.version>
@@ -39,19 +39,13 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Spring Boot WebFlux (for WebClient) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-
         <!-- Spring Boot AOP -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- Spring Boot Actuator -->
+        <!-- Spring Boot Actuator (Strategy 7: Monitoring) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -63,20 +57,20 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- Spring Boot Cache -->
+        <!-- Spring Boot Cache (Strategy 3: Caching) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
-        <!-- H2 Database (for demo) -->
+        <!-- H2 Database (In-Memory for Demo) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- Lombok (Optional - for reducing boilerplate) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -100,4 +94,3 @@
         </plugins>
     </build>
 </project>
-
