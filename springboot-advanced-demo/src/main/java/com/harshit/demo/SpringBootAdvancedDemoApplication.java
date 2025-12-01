@@ -34,6 +34,13 @@ public class SpringBootAdvancedDemoApplication implements CommandLineRunner {
         System.out.println("   GET  /api/demo/lazy-loading            - Lazy loading");
         System.out.println("   GET  /api/demo/cache-operations/{id}   - Cache operations");
         System.out.println("   GET  /api/demo/all                     - All strategies");
+        System.out.println("\n💾 Database Console:");
+        System.out.println("   http://localhost:8080/h2-console");
+        System.out.println("   JDBC URL: jdbc:h2:mem:testdb");
+        System.out.println("   Username: sa, Password: (empty)");
+        System.out.println("\n🔍 Hibernate Info:");
+        System.out.println("   http://localhost:8080/api/hibernate/info - Dialect & SQL info");
+        System.out.println("   SQL queries are logged in console (check terminal)");
         System.out.println("\n📊 Monitoring:");
         System.out.println("   http://localhost:8080/actuator");
         System.out.println("   http://localhost:8080/actuator/health");
