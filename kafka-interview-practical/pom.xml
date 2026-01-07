@@ -8,15 +8,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.14</version>
+        <version>3.2.0</version>
         <relativePath/>
     </parent>
 
     <groupId>com.harshit</groupId>
-    <artifactId>kafka-springboot-interview</artifactId>
+    <artifactId>kafka-interview-practical</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Kafka Spring Boot Interview</name>
-    <description>Complete Kafka interview preparation with code examples from basic to advanced</description>
+    <name>Kafka Interview Practical Questions</name>
+    <description>Practical Kafka interview questions with code examples and step-by-step reproduction guide</description>
 
     <properties>
         <java.version>17</java.version>
@@ -62,13 +62,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Spring Kafka Test -->
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
