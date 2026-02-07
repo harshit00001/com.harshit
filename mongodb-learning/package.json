@@ -1,0 +1,34 @@
+{
+  "name": "mongodb-learning",
+  "version": "1.0.0",
+  "description": "Complete MongoDB learning project with examples from basic to advanced",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "verify": "node verify-setup.js",
+    "basic:connection": "node basic/Example1-Connection.js",
+    "basic:crud": "node basic/Example2-CRUD.js",
+    "basic:query": "node basic/Example3-Query.js",
+    "basic:operators": "node basic/Example4-Operators.js",
+    "basic:embedded": "node basic/Example5-EmbeddedDocuments.js",
+    "intermediate:indexes": "node intermediate/Example1-Indexes.js",
+    "intermediate:textsearch": "node intermediate/Example2-TextSearch.js",
+    "intermediate:transactions": "node intermediate/Example3-Transactions.js",
+    "intermediate:validation": "node intermediate/Example4-Validation.js",
+    "advanced:aggregation": "node advanced/Example1-Aggregation.js",
+    "advanced:performance": "node advanced/Example4-Performance.js"
+  },
+  "keywords": [
+    "mongodb",
+    "database",
+    "learning",
+    "tutorial",
+    "examples"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.3.0"
+  }
+}
+
