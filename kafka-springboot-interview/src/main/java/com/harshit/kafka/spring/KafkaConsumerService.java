@@ -130,7 +130,7 @@ public class KafkaConsumerService {
             
             // Interview Point: Only acknowledge after successful processing
             // This ensures the message won't be reprocessed if something fails
-            acknowledgment.ack();
+            acknowledgment.acknowledge();
             
             log.info("Message processed and acknowledged successfully");
             
