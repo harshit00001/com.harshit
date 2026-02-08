@@ -1,0 +1,98 @@
+# Spring Boot Application Configuration
+# This file replaces the need for hibernate.cfg.xml and persistence.xml
+# Spring Boot auto-configures Hibernate and JPA based on these settings
+
+spring:
+  # Application Name
+  application:
+    name: hibernate-jpa-interview-prep
+
+  # Database Configuration
+  datasource:
+    # H2 In-Memory Database Configuration (for examples and testing)
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+    
+    # Connection Pool Settings (HikariCP is default in Spring Boot)
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1200000
+
+  # JPA/Hibernate Configuration
+  jpa:
+    # Hibernate Properties
+    hibernate:
+      # DDL Auto: create-drop (drops and recreates on startup), create, update, validate, none
+      # For production, use 'validate' or 'none'
+      # For development/examples, use 'create-drop' or 'update'
+      ddl-auto: create-drop
+      
+      # Naming Strategy: How Java names map to database names
+      naming:
+        # Physical naming strategy: converts camelCase to snake_case
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        # Implicit naming strategy: uses entity/table names as-is
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    
+    # Show SQL queries in console (useful for learning and debugging)
+    show-sql: true
+    
+    # Format SQL queries for better readability
+    properties:
+      hibernate:
+        format_sql: true
+        # Show parameter values in SQL (helpful for debugging)
+        use_sql_comments: true
+        # Dialect: Tells Hibernate which database we're using
+        dialect: org.hibernate.dialect.H2Dialect
+        # Connection provider: HikariCP (default in Spring Boot)
+        connection.provider_disables_autocommit: true
+        # Enable second-level cache (requires cache provider)
+        # cache.use_second_level_cache: false
+        # cache.use_query_cache: false
+
+  # H2 Console Configuration (for viewing database in browser)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      # Allow access from all origins (for development only)
+      settings:
+        web-allow-others: true
+
+# Server Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# Logging Configuration
+logging:
+  level:
+    # Root logger level
+    root: INFO
+    # Spring framework logs
+    org.springframework: INFO
+    # Hibernate SQL logs
+    org.hibernate.SQL: DEBUG
+    # Hibernate parameter binding logs
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    # Our application logs
+    com.harshit: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# SpringDoc OpenAPI (Swagger) Configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+

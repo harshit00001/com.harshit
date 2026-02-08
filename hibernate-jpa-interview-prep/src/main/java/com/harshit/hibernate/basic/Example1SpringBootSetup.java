@@ -274,6 +274,5 @@ public class Example1SpringBootSetup implements CommandLineRunner {
     }
 }
 
-// Import for List
-import java.util.List;
+
 
