@@ -114,7 +114,7 @@ public class ErrorHandlingConsumer {
             processOrder(message);
             
             // Interview Point: Only acknowledge on success
-            acknowledgment.ack();
+            acknowledgment.acknowledge();
             log.info("Order processed and acknowledged");
             
         } catch (IllegalArgumentException e) {
