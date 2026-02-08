@@ -4,25 +4,99 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Example Entity: User
+ * User Entity - Basic Hibernate/JPA Entity Example
  * 
- * INTERVIEW QUESTION: What are the key annotations in Hibernate/JPA?
+ * ====================================================================================
+ * INTERVIEW QUESTION: Explain JPA entity annotations and their purpose.
+ * ====================================================================================
  * 
- * ANSWER:
- * @Entity: Marks class as a JPA entity (table in database)
- * @Table: Specifies table name (optional, defaults to class name)
- * @Id: Marks field as primary key
- * @GeneratedValue: Auto-generates primary key values
- * @Column: Maps field to column (optional, defaults to field name)
- * @Temporal: Maps Date/Calendar to appropriate SQL type
- * @Enumerated: Maps enum to database column
+ * DETAILED ANSWER:
  * 
+ * JPA entities are Java classes that represent database tables. They use annotations
+ * to map Java objects to relational database structures. Let me explain each annotation:
+ * 
+ * @Entity:
+ * - Marks this class as a JPA entity
+ * - Tells JPA that this class should be mapped to a database table
+ * - The table name defaults to the class name (User -> users, camelCase to snake_case)
+ * - Entity classes must have a no-argument constructor
+ * - Entity classes should not be final (Hibernate uses proxies)
+ * 
+ * @Table:
+ * - Specifies the database table name
+ * - Optional - if omitted, table name is derived from entity name
+ * - Can specify schema, catalog, indexes, unique constraints
+ * - Example: @Table(name = "users", schema = "public")
+ * 
+ * @Id:
+ * - Marks a field as the primary key
+ * - Each entity must have exactly one @Id field
+ * - Can be on a field or getter method
+ * - Primary key uniquely identifies each row in the table
+ * 
+ * @GeneratedValue:
+ * - Specifies how the primary key value is generated
+ * - Strategies:
+ *   * IDENTITY: Database auto-increment (MySQL AUTO_INCREMENT, PostgreSQL SERIAL)
+ *   * SEQUENCE: Uses database sequence (Oracle, PostgreSQL)
+ *   * TABLE: Uses a separate table to generate IDs
+ *   * AUTO: Let JPA provider choose (usually IDENTITY or SEQUENCE)
+ * - IDENTITY is most common and works with most databases
+ * 
+ * @Column:
+ * - Maps a field to a database column
+ * - Optional - if omitted, column name is derived from field name
+ * - Attributes:
+ *   * name: Column name in database
+ *   * nullable: Can the column be NULL?
+ *   * unique: Is the column unique?
+ *   * length: Maximum length (for String)
+ *   * precision/scale: For BigDecimal
+ *   * insertable/updatable: Can this column be inserted/updated?
+ * 
+ * @Temporal:
+ * - Specifies how Date/Calendar should be persisted
+ * - Types:
+ *   * DATE: Only date (YYYY-MM-DD)
+ *   * TIME: Only time (HH:MM:SS)
+ *   * TIMESTAMP: Date and time (YYYY-MM-DD HH:MM:SS)
+ * - Required for Date/Calendar fields in JPA 2.1 and earlier
+ * - Optional in JPA 2.2+ (uses TIMESTAMP by default)
+ * 
+ * @Enumerated:
+ * - Maps Java enum to database column
+ * - Strategies:
+ *   * ORDINAL: Stores enum index (0, 1, 2...) - not recommended (breaks if enum order changes)
+ *   * STRING: Stores enum name ("ACTIVE", "INACTIVE") - recommended
+ * 
+ * @PrePersist and @PreUpdate:
+ * - Lifecycle callbacks - methods called automatically by JPA
+ * - @PrePersist: Called before entity is persisted (INSERT)
+ * - @PreUpdate: Called before entity is updated (UPDATE)
+ * - Useful for setting timestamps, validation, etc.
+ * 
+ * ====================================================================================
  * REAL-WORLD SCENARIO:
- * User entity represents a customer in an e-commerce system.
- * Each user has a unique ID, email, and profile information.
+ * ====================================================================================
+ * 
+ * In a user management system, this entity would represent a user account:
+ * - Each user has a unique ID (primary key)
+ * - Username and email must be unique
+ * - Created/updated timestamps track when user was created/modified
+ * - Status enum represents user account state (active, inactive, suspended)
+ * 
+ * This entity would be used in:
+ * - User registration (persist new user)
+ * - User login (find by username/email)
+ * - User profile updates (update existing user)
+ * - User management (activate/deactivate users)
  */
 @Entity
-@Table(name = "users")
+@Table(name = "users", 
+       uniqueConstraints = {
+           @UniqueConstraint(columnNames = "username"),
+           @UniqueConstraint(columnNames = "email")
+       })
 public class User {
     
     @Id
@@ -53,19 +127,54 @@ public class User {
     private Date updatedAt;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private UserStatus status;
+    @Column(name = "status", nullable = false)
+    private UserStatus status = UserStatus.ACTIVE;
     
-    // Default constructor (required by Hibernate)
+    /**
+     * Default constructor (required by JPA/Hibernate)
+     * 
+     * JPA requires entities to have a no-argument constructor.
+     * This is used by Hibernate when loading entities from database.
+     */
     public User() {
     }
     
-    // Constructor with required fields
+    /**
+     * Convenience constructor
+     * 
+     * Creates user with required fields.
+     * Timestamps will be set automatically by @PrePersist callback.
+     */
     public User(String username, String email) {
         this.username = username;
         this.email = email;
-        this.createdAt = new Date();
         this.status = UserStatus.ACTIVE;
+    }
+    
+    /**
+     * Lifecycle Callback: Before Persist
+     * 
+     * Automatically called by JPA before INSERT operation.
+     * Sets createdAt and updatedAt timestamps.
+     * This ensures timestamps are always set correctly.
+     */
+    @PrePersist
+    protected void onCreate() {
+        Date now = new Date();
+        this.createdAt = now;
+        this.updatedAt = now;
+    }
+    
+    /**
+     * Lifecycle Callback: Before Update
+     * 
+     * Automatically called by JPA before UPDATE operation.
+     * Updates the updatedAt timestamp.
+     * This tracks when entity was last modified.
+     */
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Date();
     }
     
     // Getters and Setters
@@ -155,7 +264,20 @@ public class User {
     }
 }
 
+/**
+ * User Status Enumeration
+ * 
+ * Represents the possible states of a user account:
+ * - ACTIVE: User can log in and use the system
+ * - INACTIVE: User account is disabled but not deleted
+ * - SUSPENDED: User account is temporarily suspended
+ * 
+ * Stored as STRING in database for readability and maintainability.
+ * Example: "ACTIVE" instead of 0, "INACTIVE" instead of 1
+ */
 enum UserStatus {
-    ACTIVE, INACTIVE, SUSPENDED
+    ACTIVE,      // User account is active and can be used
+    INACTIVE,    // User account is inactive (disabled)
+    SUSPENDED    // User account is suspended (temporarily disabled)
 }
 
