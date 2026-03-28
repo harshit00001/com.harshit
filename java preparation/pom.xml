@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.harshit</groupId>
+    <artifactId>java-interview-preparation</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>java-interview-preparation</name>
+    <description>Interview Q&amp;A as Java files — Java 17</description>
+
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- Topic 12: BCryptPasswordEncoder demo (no full Spring Security web stack) -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>6.2.4</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>add-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>01-hashmap-collections/src/main/java</source>
+                                <source>02-oop-basics/src/main/java</source>
+                                <source>03-abstract-classes-interfaces/src/main/java</source>
+                                <source>04-string-manipulation/src/main/java</source>
+                                <source>05-serialization-immutability/src/main/java</source>
+                                <source>06-comparable-comparator/src/main/java</source>
+                                <source>07-jvm-memory-gc/src/main/java</source>
+                                <source>08-concurrency-multithreading/src/main/java</source>
+                                <source>09-java8-streams/src/main/java</source>
+                                <source>10-spring-boot/src/main/java</source>
+                                <source>11-spring-transactions/src/main/java</source>
+                                <source>12-spring-security/src/main/java</source>
+                                <source>13-microservices/src/main/java</source>
+                                <source>14-system-design-real-world/src/main/java</source>
+                                <source>15-kafka/src/main/java</source>
+                                <source>16-database-jpa/src/main/java</source>
+                                <source>17-coding-questions/src/main/java</source>
+                                <source>18-design-patterns/src/main/java</source>
+                                <source>19-agile/src/main/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>com.harshit.preparation.InterviewPrepRunner</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: spring-transaction-interview
+  datasource:
+    url: jdbc:h2:mem:txdemo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    com.harshit.transaction: INFO
+    org.springframework.transaction: INFO
+    org.springframework.orm.jpa: WARN

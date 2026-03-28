@@ -1,0 +1,21 @@
+spring:
+  main:
+    web-application-type: none
+  datasource:
+    url: jdbc:h2:mem:interview;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  security:
+    user:
+      name: demo
+      password: demo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,beans
