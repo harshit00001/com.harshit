@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Job Hunter — Java Backend</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { color: #0f62fe; }
+        .toolbar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+        input[type=text], input[type=number] { padding: 0.5rem; }
+        input[type=text] { flex: 1; min-width: 240px; }
+        button { padding: 0.5rem 1rem; cursor: pointer; }
+        .job { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+        .score { font-weight: bold; color: #198038; }
+        .meta { color: #525252; font-size: 0.9rem; }
+        a.apply { color: #0f62fe; font-weight: bold; }
+        #status { color: #525252; font-size: 0.9rem; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+<h1>Job Hunter</h1>
+<p>Java backend / microservices matcher. Configure profile in <code>application.yml</code>.</p>
+
+<div class="toolbar">
+    <input type="text" id="query" placeholder="e.g. Java microservices JWT remote India"/>
+    <input type="number" id="days" value="14" min="1" max="90" title="Last N days"/>
+    <button type="button" id="searchBtn">Search</button>
+    <button type="button" id="fetchBtn">Refresh jobs from sources</button>
+</div>
+<div id="status"></div>
+<div id="jobs"></div>
+
+<script>
+    const statusEl = document.getElementById('status');
+    const jobsEl = document.getElementById('jobs');
+
+    function renderJobs(jobs) {
+        if (!jobs.length) {
+            jobsEl.innerHTML = '<p>No matches. Click Refresh jobs or change search.</p>';
+            return;
+        }
+        jobsEl.innerHTML = jobs.map(j => `
+            <div class="job">
+                <div class="score">Score ${j.score}</div>
+                <h2>${escapeHtml(j.title)}</h2>
+                <div class="meta">${escapeHtml(j.company)} · ${escapeHtml(j.location || '')} · ${escapeHtml(j.source)}</div>
+                <p>${escapeHtml(j.summary || '')}</p>
+                <p><a class="apply" href="${escapeAttr(j.applyUrl)}" target="_blank" rel="noopener">Apply →</a></p>
+            </div>`).join('');
+    }
+
+    function escapeHtml(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    function escapeAttr(s) {
+        return String(s).replace(/"/g, '&quot;');
+    }
+
+    async function loadRecommended() {
+        const days = document.getElementById('days').value || 14;
+        statusEl.textContent = 'Loading...';
+        const res = await fetch(`/api/jobs/recommended?days=${days}&minScore=3&limit=30`);
+        const jobs = await res.json();
+        statusEl.textContent = `Showing ${jobs.length} recommended jobs (last ${days} days).`;
+        renderJobs(jobs);
+    }
+
+    async function search() {
+        const q = document.getElementById('query').value.trim();
+        const days = document.getElementById('days').value || 14;
+        statusEl.textContent = 'Searching...';
+        const res = await fetch('/api/jobs/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: q, days: Number(days), limit: 30 })
+        });
+        const jobs = await res.json();
+        statusEl.textContent = q ? `Found ${jobs.length} jobs for "${q}".` : `Showing ${jobs.length} jobs.`;
+        renderJobs(jobs);
+    }
+
+    async function fetchSources() {
+        statusEl.textContent = 'Fetching from Remotive / Greenhouse / bookmarks...';
+        const res = await fetch('/api/jobs/fetch', { method: 'POST' });
+        const data = await res.json();
+        statusEl.textContent = `Fetch done. New jobs saved: ${data.newJobsSaved}. Reloading list...`;
+        await loadRecommended();
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', search);
+    document.getElementById('fetchBtn').addEventListener('click', fetchSources);
+    loadRecommended();
+</script>
+</body>
+</html>

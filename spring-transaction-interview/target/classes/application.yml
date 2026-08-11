@@ -1,6 +1,16 @@
+app:
+  interview:
+    display-name: interview-lab
+    scheduling-enabled: false
+
 spring:
   application:
     name: spring-transaction-interview
+  # Disable default user/password in logs (Security still uses SecurityFilterChain in code)
+  security:
+    user:
+      name: "_disabled_in_local_lab"
+      password: "{noop}_disabled"
   datasource:
     url: jdbc:h2:mem:txdemo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
@@ -17,7 +27,18 @@ spring:
       hibernate:
         format_sql: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
 logging:
+  pattern:
+    level: "%5p [${spring.application.name:}] %X{correlationId:-}"
   level:
     com.harshit.transaction: INFO
     org.springframework.transaction: INFO

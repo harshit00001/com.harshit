@@ -1,0 +1,6 @@
+com\harshit\gc\memory\MemoryManagement.class
+com\harshit\gc\advanced\GarbageCollectors.class
+com\harshit\gc\extra\JvmJreJdkInterviewQA.class
+com\harshit\gc\basics\GarbageCollectionBasics.class
+com\harshit\gc\basics\Person.class
+com\harshit\gc\basics\FinalizableObject.class

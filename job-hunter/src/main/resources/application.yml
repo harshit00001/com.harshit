@@ -1,0 +1,83 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: job-hunter
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  datasource:
+    url: jdbc:h2:file:./data/job-hunter;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+job-hunter:
+  fetch-on-startup: true
+  fetch-cron: "0 0 6,18 * * *"
+  default-days: 14
+  profile:
+    experience-years: 4
+    min-experience-years: 2
+    max-experience-years: 6
+    title-keywords:
+      - java
+      - software engineer
+      - backend
+      - spring
+      - developer
+    must-have-skills:
+      - java
+    strong-skills:
+      - spring boot
+      - spring
+      - microservice
+      - microservices
+      - hibernate
+      - jpa
+      - jwt
+      - oauth
+      - rest
+      - kafka
+      - sql
+      - postgresql
+      - docker
+      - aws
+    location-keywords:
+      - india
+      - remote
+      - bangalore
+      - bengaluru
+      - pune
+      - hyderabad
+      - noida
+      - gurgaon
+      - gurugram
+    exclude-title-keywords:
+      - intern
+      - internship
+      - principal
+      - staff
+      - director
+  sources:
+    - name: Remotive
+      type: remotive
+      enabled: true
+    - name: Greenhouse — GitLab
+      type: greenhouse
+      board-token: gitlab
+      enabled: true
+    - name: IBM Careers (manual)
+      type: bookmark
+      search-url: https://www.ibm.com/in-en/careers/search
+      enabled: true
+      keywords:
+        - java
+        - software engineer

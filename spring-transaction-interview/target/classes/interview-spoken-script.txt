@@ -1,0 +1,59 @@
+================================================================================
+  Spring @Transactional — spoken interview scripts (30s, 2min, follow-ups)
+  Same text lives in: docs/INTERVIEW_SCRIPT.md (section "Spoken scripts")
+================================================================================
+
+--- 30 SECONDS ---
+
+@Transactional is handled by Spring at runtime, not by the JVM. Spring wraps
+my bean in a proxy; when another component calls a transactional method, a
+transaction interceptor runs first. It asks the transaction manager to start
+a transaction—usually by taking a connection from the pool and setting
+autocommit off for this thread. The work is bound to the current thread so
+every repository call in that request uses the same connection. If the
+method finishes normally, it commits; if a rollback rule is triggered—
+typically a runtime exception, unless I say otherwise—it rolls back and the
+connection is released. That's the core loop: proxy, interceptor, transaction
+manager, commit or rollback.
+
+--- 2 MINUTES ---
+
+I'll walk through the lifecycle.
+
+First, I put @Transactional on a service method—or the class, with
+method-level overrides. Spring doesn't use a compile-time hook for this; it
+uses AOP, so it only works when the call goes through the proxy to that
+bean—so I'm aware that self-invocation on "this" can skip the proxy and the
+transaction won't start.
+
+When a client calls the proxied method, TransactionInterceptor runs. It reads
+attributes like propagation—REQUIRED is common: join an existing transaction
+or start a new one—isolation, timeout, readOnly, and which exceptions cause
+rollback, using rollbackFor and noRollbackFor if I customize.
+
+The PlatformTransactionManager—for example DataSourceTransactionManager for
+JDBC—acquires a connection and stores it, often via thread-local storage, so
+all DAOs in the same call stack share it.
+
+The target method runs. On success, the manager commits. On an exception,
+Spring applies the rollback rules—by default, unchecked exceptions roll back,
+checked don't, unless I change that—and then the manager rolls back if needed,
+and releases the connection back to the pool.
+
+So internally: annotation metadata, AOP, transaction manager, thread-bound
+resource. The annotation is the declaration; the proxy and interceptor are
+the machinery.
+
+--- ONE-LINER FOLLOW-UPS ---
+
+Self-invocation: The proxy only wraps the bean from the outside. Calling
+"this" bypasses the proxy, so I'd use another bean, a self-injected interface,
+or TransactionTemplate if I need guaranteed behavior.
+
+Propagation: REQUIRED joins or creates; REQUIRES_NEW suspends the current one
+and runs in a new transaction; NESTED uses a savepoint where supported.
+
+readOnly: A hint: some drivers/ORMs can optimize, and in some cases it can
+avoid flush or unnecessary writes, depending on the stack.
+
+================================================================================

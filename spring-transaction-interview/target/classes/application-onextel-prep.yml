@@ -1,0 +1,12 @@
+# Example profile: application-{profile}.yml
+# Run:  mvn spring-boot:run -Dspring-boot.run.profiles=onextel-prep
+#  or:  java -jar app.jar --spring.profiles.active=onextel-prep
+
+app:
+  prep:
+    label: "Onextel / Spring Boot interview prep (profile-based config example)"
+
+logging:
+  level:
+    com.harshit.transaction.prep: INFO
+    com.harshit.transaction.config.ApiRequestLoggingAspect: INFO

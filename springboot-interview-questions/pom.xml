@@ -53,7 +53,7 @@
 
         <!-- Spring Boot Batch -->
         <dependency>
-            <groupId>org.springframework.batch</groupId>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
         </dependency>
 

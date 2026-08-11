@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ATS Resume Builder</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 1rem auto; padding: 0 1rem; }
+        h1 { color: #0f62fe; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+        textarea { width: 100%; min-height: 180px; font-family: inherit; }
+        input, textarea { padding: 0.4rem; }
+        button { margin: 0.25rem 0.25rem 0.25rem 0; padding: 0.5rem 0.9rem; cursor: pointer; }
+        .score { font-size: 1.4rem; font-weight: bold; }
+        .good { color: #198038; }
+        .warn { color: #f1c21b; }
+        .bad { color: #da1e28; }
+        pre { background: #f4f4f4; padding: 0.75rem; overflow: auto; max-height: 420px; font-size: 0.85rem; }
+        label { font-weight: 600; display: block; margin-top: 0.75rem; }
+    </style>
+</head>
+<body>
+<h1>ATS Resume Builder</h1>
+<p>Paste a job description → get ATS score → tailor resume → download PDF. Edits save to <code>data/resume.json</code>.</p>
+
+<div class="grid">
+    <div>
+        <label>Job description</label>
+        <textarea id="jd" placeholder="Paste JD here (Java, Spring Boot, microservices, Kafka...)"></textarea>
+        <button id="analyzeBtn">Analyze ATS score</button>
+        <button id="tailorBtn">Tailor resume to JD</button>
+        <button id="pdfBtn">Download PDF</button>
+        <button id="resetBtn">Reset to default</button>
+
+        <div id="atsResult" style="margin-top:1rem;"></div>
+    </div>
+    <div>
+        <label>Edit resume (JSON fields)</label>
+        <label>Summary</label>
+        <textarea id="summary"></textarea>
+        <label>Skills (comma separated)</label>
+        <input id="skills" style="width:100%"/>
+        <label>Title (optional if location set)</label>
+        <input id="title" style="width:100%"/>
+        <label>Location (header)</label>
+        <input id="location" style="width:100%"/>
+        <label>LinkedIn URL (PDF link)</label>
+        <input id="linkedinUrl" style="width:100%"/>
+        <button id="saveBtn">Save resume</button>
+        <label>Preview</label>
+        <pre id="preview"></pre>
+    </div>
+</div>
+
+<script>
+    let resume = {};
+
+    async function loadResume() {
+        const res = await fetch('/api/resume');
+        resume = await res.json();
+        document.getElementById('summary').value = resume.summary || '';
+        document.getElementById('skills').value = (resume.skills || []).join(', ');
+        document.getElementById('title').value = resume.title || '';
+        document.getElementById('location').value = resume.location || '';
+        document.getElementById('linkedinUrl').value = resume.linkedinUrl || '';
+        document.getElementById('preview').textContent = JSON.stringify(resume, null, 2);
+    }
+
+    function scoreClass(score) {
+        if (score >= 70) return 'good';
+        if (score >= 55) return 'warn';
+        return 'bad';
+    }
+
+    function renderReport(label, report) {
+        return `<div><strong>${label}</strong>
+            <div class="score ${scoreClass(report.score)}">${report.score}/100 — ${report.grade}</div>
+            <p><strong>Matched:</strong> ${(report.matchedKeywords || []).slice(0,12).join(', ') || '—'}</p>
+            <p><strong>Missing:</strong> ${(report.missingKeywords || []).slice(0,12).join(', ') || '—'}</p>
+            <ul>${(report.suggestions || []).map(s => `<li>${s}</li>`).join('')}</ul></div>`;
+    }
+
+    document.getElementById('analyzeBtn').onclick = async () => {
+        const jd = document.getElementById('jd').value;
+        const res = await fetch('/api/ats/analyze', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ jobDescription: jd })
+        });
+        const report = await res.json();
+        document.getElementById('atsResult').innerHTML = renderReport('ATS analysis', report);
+    };
+
+    document.getElementById('tailorBtn').onclick = async () => {
+        const jd = document.getElementById('jd').value;
+        const res = await fetch('/api/ats/tailor', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ jobDescription: jd })
+        });
+        const data = await res.json();
+        document.getElementById('atsResult').innerHTML =
+            renderReport('Before tailor', data.reportBefore) +
+            renderReport('After tailor', data.reportAfter);
+        await loadResume();
+    };
+
+    document.getElementById('saveBtn').onclick = async () => {
+        resume.summary = document.getElementById('summary').value;
+        resume.title = document.getElementById('title').value;
+        resume.location = document.getElementById('location').value;
+        resume.linkedinUrl = document.getElementById('linkedinUrl').value;
+        resume.skills = document.getElementById('skills').value.split(',').map(s => s.trim()).filter(Boolean);
+        await fetch('/api/resume', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(resume)
+        });
+        await loadResume();
+        alert('Saved');
+    };
+
+    document.getElementById('pdfBtn').onclick = () => {
+        window.open('/api/resume/pdf', '_blank');
+    };
+
+    document.getElementById('resetBtn').onclick = async () => {
+        await fetch('/api/resume/reset', { method: 'POST' });
+        await loadResume();
+    };
+
+    loadResume();
+</script>
+</body>
+</html>

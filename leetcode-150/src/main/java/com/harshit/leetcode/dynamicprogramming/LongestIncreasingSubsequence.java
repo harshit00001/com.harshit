@@ -35,11 +35,18 @@ public class LongestIncreasingSubsequence {
      * @return Length of longest increasing subsequence
      */
     public int lengthOfLIS(int[] nums) {
-        // Write your logic here
-        // Hint: dp[i] = length of LIS ending at index i
-        // For each i, check all previous j where nums[j] < nums[i]
-        // dp[i] = max(dp[j]) + 1 for all valid j
-        return 0;
+        int[] dp = new int[nums.length];
+        int best = 0;
+        for (int i = 0; i < nums.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            best = Math.max(best, dp[i]);
+        }
+        return best;
     }
     
     /**

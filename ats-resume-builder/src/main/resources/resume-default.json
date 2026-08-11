@@ -1,0 +1,170 @@
+{
+  "fullName": "Harshit Raj",
+  "title": "Software Developer",
+  "location": "Pune, Maharashtra",
+  "phone": "+91-7979975039",
+  "email": "rajharshit453@gmail.com",
+  "linkedin": "LinkedIn",
+  "linkedinUrl": "https://www.linkedin.com/in/harshit-raj-163376199",
+  "summary": "Software Developer with 4+ years of hands-on experience building and optimizing high-quality Spring Boot microservices, RESTful APIs, and Kafka-driven workflows in Agile telecom environments. Strong in PostgreSQL, Kubernetes, GitLab CI/CD, JUnit/Mockito, and React.js. Focused on clean, scalable OSS/BSS delivery for Telstra and Bell Canada with measurable quality, automation, and performance gains.",
+  "skills": [
+    "Java",
+    "SQL",
+    "Python",
+    "Spring Boot",
+    "Spring Security",
+    "RESTful APIs",
+    "Microservices",
+    "Spring Data JPA",
+    "Kafka",
+    "JUnit",
+    "Mockito",
+    "JWT",
+    "React.js",
+    "PostgreSQL",
+    "MySQL",
+    "Redis",
+    "MongoDB",
+    "AWS",
+    "Docker",
+    "Kubernetes",
+    "Jenkins",
+    "CI/CD",
+    "XML",
+    "Serenity BDD",
+    "SoapUI",
+    "Distributed Systems",
+    "HLD",
+    "LLD",
+    "Maven",
+    "Git",
+    "GitLab",
+    "Jira",
+    "Splunk",
+    "Apigee",
+    "SonarQube",
+    "Data Structures and Algorithms",
+    "GenAI",
+    "Cursor",
+    "MCP",
+    "Tabnine",
+    "Copilot"
+  ],
+  "skillCategories": [
+    {
+      "label": "Languages",
+      "items": ["Java", "SQL", "Python"]
+    },
+    {
+      "label": "Backend & Frameworks",
+      "items": [
+        "Spring Boot",
+        "Spring Security",
+        "RESTful APIs",
+        "Microservices",
+        "Spring Data JPA",
+        "Kafka",
+        "JUnit",
+        "Mockito",
+        "JWT",
+        "React.js",
+        "XML"
+      ]
+    },
+    {
+      "label": "Search / Data / Infra",
+      "items": ["PostgreSQL", "MySQL", "Apache Kafka", "Redis", "MongoDB"]
+    },
+    {
+      "label": "Cloud / DevOps",
+      "items": ["AWS", "Docker", "Kubernetes", "Jenkins", "CI/CD", "GitLab"]
+    },
+    {
+      "label": "Tools & Other",
+      "items": [
+        "Serenity BDD",
+        "SoapUI",
+        "Distributed Systems",
+        "HLD",
+        "LLD",
+        "Maven",
+        "Git",
+        "Jira",
+        "Splunk",
+        "Apigee",
+        "SonarQube",
+        "Data Structures and Algorithms",
+        "GenAI",
+        "Cursor",
+        "MCP",
+        "Tabnine",
+        "Copilot"
+      ]
+    }
+  ],
+  "experiences": [
+    {
+      "role": "Software Developer",
+      "company": "Amdocs",
+      "location": "Pune, Maharashtra",
+      "startDate": "Jan 2026",
+      "endDate": "Present",
+      "client": "Bell Canada",
+      "bullets": [
+        "Built a Spring Boot microservice generating XML offer catalogs consumed by a downstream provisioning system to onboard 1,100+ roaming offers, price plans, and entitlements for enterprise subscribers.",
+        "Delivered 8+ features covering flat-rate offer generation and active-plan eligibility validation, cutting invalid catalog output by 22% and centralizing error handling, KPI tracking, and audit logging via a shared validation utility.",
+        "Authored 100+ JUnit and Serenity BDD tests via GitLab CI/CD with feature-toggle rollout, reaching 85%+ coverage across all plan flows."
+      ]
+    },
+    {
+      "role": "Software Developer",
+      "company": "Amdocs",
+      "location": "Pune, Maharashtra",
+      "startDate": "Jan 2024",
+      "endDate": "Dec 2025",
+      "client": "Telstra",
+      "bullets": [
+        "Developed and maintained 20+ Spring Boot microservices using PostgreSQL for telecom OSS platforms, supporting 100K+ daily service orders through Kafka-based orchestration and automated order fulfillment.",
+        "Enhanced the Service Order Management (SOM) platform, improving end-to-end order processing efficiency by 30%, and led the migration of 30+ REST APIs to a new Apigee API Management platform.",
+        "Architected a robust inventory management module featuring advanced filtering and pagination, directly improving data retrieval efficiency by 40% for key users.",
+        "Improved application performance by 25–35% through SQL query optimization, connection pooling, caching, and performance tuning.",
+        "Deployed and managed 15+ containerized microservices on Kubernetes, achieving 99.99% application availability, and optimized the Parallel MEC Distribution process, reducing deployment time by 50%.",
+        "Built a SoapUI automation framework that reduced manual testing effort by 40% and execution time by 60%, while collaborating on 30+ features and 10+ production releases in an Agile environment."
+      ]
+    },
+    {
+      "role": "Software Engineering Associate",
+      "company": "Amdocs",
+      "location": "Pune, Maharashtra",
+      "startDate": "Jul 2022",
+      "endDate": "Dec 2023",
+      "client": "Telstra",
+      "bullets": [
+        "Developed AMEND and CANCEL functionalities for the Complex Logistics Microservice, enhancing telecom order lifecycle management.",
+        "Resolved 200+ defects across SIT and UAT environments while achieving 100% security compliance by fixing SonarQube and Docker vulnerabilities.",
+        "Increased JUnit test coverage from 30% to over 80%, ensuring high code quality with minimal duplication and zero critical production defects.",
+        "Delivered 30+ features with cross-functional Agile teams through root cause analysis and on-time release execution."
+      ]
+    },
+    {
+      "role": "Project Trainee",
+      "company": "Amdocs",
+      "location": "Pune, Maharashtra",
+      "startDate": "Feb 2022",
+      "endDate": "May 2022",
+      "bullets": [
+        "Completed a focused internship on enterprise software delivery workflows and production readiness practices.",
+        "Developed an internal product management system using JSP, Servlets, MySQL, HTML, CSS, and JavaScript."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Computer Application — CGPA 9.02",
+      "institution": "Birla Institute of Technology, Mesra",
+      "startDate": "2020",
+      "endDate": "2022",
+      "details": "Ranchi, India"
+    }
+  ]
+}
