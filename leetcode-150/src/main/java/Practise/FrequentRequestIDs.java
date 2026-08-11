@@ -18,6 +18,9 @@ Your task is to count how many distinct request IDs satisfy this condition.
 public class FrequentRequestIDs {
         public static int countFrequentRequestIDs(String[] requestIDs, int[] timestamps, int timeWindow) {
             int count =0;
+            List<Integer> ls = new ArrayList<>();
+            ls.add(2);
+            ls.add(2);
             Map<String, List<Integer>> map = new HashMap<>();
             for(int i=0;i<requestIDs.length;i++)
             {

@@ -1,0 +1,17 @@
+# Maven / Java build output
+target/
+**/target/
+*.class
+
+# Never commit private keys or test SSH material
+**/id_rsa
+**/id_rsa.pub
+kafka-4.1.1-src/tests/docker/ssh/
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

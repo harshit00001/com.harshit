@@ -10,18 +10,19 @@
         <module name="KafkaDemo" />
         <module name="spring-rest-annotations" />
         <module name="kafka-interview-practical" />
+        <module name="java-multithreading-learning" />
         <module name="springboot-advanced-demo" />
         <module name="hibernate-jpa-interview-prep" />
-        <module name="dsa-interview-prep" />
-        <module name="kafka-springboot-interview" />
+        <module name="java-collections-interview" />
         <module name="Amdocs" />
-        <module name="leetcode-150" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Amdocs" target="17" />
       <module name="dsa-interview-prep" target="11" />
       <module name="hibernate-jpa-interview-prep" target="11" />
+      <module name="java-collections-interview" target="17" />
+      <module name="java-multithreading-learning" target="17" />
       <module name="kafka-interview-practical" target="17" />
       <module name="kafka-springboot-interview" target="17" />
       <module name="KafkaDemo" target="17" />
@@ -33,6 +34,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="KafkaDemo" options="-parameters" />
+      <module name="hibernate-jpa-interview-prep" options="-parameters" />
       <module name="kafka-interview-practical" options="-parameters" />
       <module name="kafka-springboot-interview" options="-parameters" />
       <module name="spring-rest-annotations" options="-parameters" />

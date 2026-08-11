@@ -5,13 +5,12 @@
       <list>
         <option value="$PROJECT_DIR$/JavaCoding/pom.xml" />
         <option value="$PROJECT_DIR$/springboot-advanced-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/kafka-springboot-interview/pom.xml" />
         <option value="$PROJECT_DIR$/spring-rest-annotations/pom.xml" />
-        <option value="$PROJECT_DIR$/dsa-interview-prep/pom.xml" />
-        <option value="$PROJECT_DIR$/leetcode-150/pom.xml" />
-        <option value="$PROJECT_DIR$/kafka-interview-practical/pom.xml" />
         <option value="$PROJECT_DIR$/Kafka-main/pom.xml" />
+        <option value="$PROJECT_DIR$/kafka-interview-practical/pom.xml" />
         <option value="$PROJECT_DIR$/hibernate-jpa-interview-prep/pom.xml" />
+        <option value="$PROJECT_DIR$/java-multithreading-learning/pom.xml" />
+        <option value="$PROJECT_DIR$/java-collections-interview/pom.xml" />
       </list>
     </option>
   </component>

@@ -5,10 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/JavaCoding/Amdocs.iml" filepath="$PROJECT_DIR$/JavaCoding/Amdocs.iml" />
       <module fileurl="file://$PROJECT_DIR$/Kafka-main/KafkaDemo.iml" filepath="$PROJECT_DIR$/Kafka-main/KafkaDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/com.harshit.iml" filepath="$PROJECT_DIR$/.idea/com.harshit.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-interview-prep/dsa-interview-prep.iml" filepath="$PROJECT_DIR$/dsa-interview-prep/dsa-interview-prep.iml" />
       <module fileurl="file://$PROJECT_DIR$/hibernate-jpa-interview-prep/hibernate-jpa-interview-prep.iml" filepath="$PROJECT_DIR$/hibernate-jpa-interview-prep/hibernate-jpa-interview-prep.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-collections-interview/java-collections-interview.iml" filepath="$PROJECT_DIR$/java-collections-interview/java-collections-interview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-multithreading-learning/java-multithreading-learning.iml" filepath="$PROJECT_DIR$/java-multithreading-learning/java-multithreading-learning.iml" />
       <module fileurl="file://$PROJECT_DIR$/kafka-interview-practical/kafka-interview-practical.iml" filepath="$PROJECT_DIR$/kafka-interview-practical/kafka-interview-practical.iml" />
-      <module fileurl="file://$PROJECT_DIR$/kafka-springboot-interview/kafka-springboot-interview.iml" filepath="$PROJECT_DIR$/kafka-springboot-interview/kafka-springboot-interview.iml" />
       <module fileurl="file://$PROJECT_DIR$/leetcode-150/leetcode-150.iml" filepath="$PROJECT_DIR$/leetcode-150/leetcode-150.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-rest-annotations/spring-rest-annotations.iml" filepath="$PROJECT_DIR$/spring-rest-annotations/spring-rest-annotations.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot-advanced-demo/springboot-advanced-demo.iml" filepath="$PROJECT_DIR$/springboot-advanced-demo/springboot-advanced-demo.iml" />

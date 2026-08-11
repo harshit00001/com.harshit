@@ -34,7 +34,7 @@ public class SynchronizationBasics {
      * leading to lost updates and incorrect results.
      */
     private static void demonstrateProblem() throws InterruptedException {
-        Counter counter = new Counter();
+        Counter2 counter = new Counter2();
         
         // Create multiple threads that increment the counter
         Thread t1 = new Thread(() -> {
@@ -67,7 +67,7 @@ public class SynchronizationBasics {
      * ensuring thread-safe operations.
      */
     private static void demonstrateSolution() throws InterruptedException {
-        Counter counter = new Counter();
+        Counter2 counter = new Counter2();
         
         Thread t1 = new Thread(() -> {
             for (int i = 0; i < 1000; i++) {
@@ -96,7 +96,7 @@ public class SynchronizationBasics {
 /**
  * Counter class to demonstrate synchronization
  */
-class Counter {
+class Counter2 {
     private int count = 0;
     
     /**
