@@ -1,0 +1,6 @@
+set-ExecutionPolicy RemoteSigned -Scope CurrentUser 
+Get-ExecutionPolicy
+Get-ExecutionPolicy -list
+npm config set registry https://registry.npmjs.org/
+npm install -g @angular/cli
+ng new cwh-todo-list
