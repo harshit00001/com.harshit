@@ -47,6 +47,12 @@ public final class Q16StringProcessingWithStreams implements InterviewDemo {
         String word = "madam";
         boolean palindrome = word.equals(new StringBuilder(word).reverse().toString());
         System.out.println(word + " palindrome? " + palindrome);
+
+//        Optional<Integer> maxSalary = employees.stream()
+//                .collect(Collectors.collectingAndThen(
+//                        Collectors.maxBy(Comparator.naturalOrder()),
+//                        result -> result
+//                ));
     }
 
     public static void main(String[] args) throws Exception {

@@ -2,6 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Angular/appointment" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Angular/book-management-system" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Angular/cwh-todo-list" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/JavaCoding" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/java-collections-interview" vcs="Git" />
   </component>

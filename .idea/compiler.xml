@@ -11,6 +11,7 @@
         <module name="spring-rest-annotations" />
         <module name="kafka-interview-practical" />
         <module name="java-multithreading-learning" />
+        <module name="java8-multithreading-interview-prep" />
         <module name="springboot-advanced-demo" />
         <module name="hibernate-jpa-interview-prep" />
         <module name="java-collections-interview" />
@@ -23,6 +24,7 @@
       <module name="hibernate-jpa-interview-prep" target="11" />
       <module name="java-collections-interview" target="17" />
       <module name="java-multithreading-learning" target="17" />
+      <module name="java8-multithreading-interview-prep" target="17" />
       <module name="kafka-interview-practical" target="17" />
       <module name="kafka-springboot-interview" target="17" />
       <module name="KafkaDemo" target="17" />
