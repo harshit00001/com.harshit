@@ -100,6 +100,9 @@ public class AtsScoringService {
         if (!notBlank(resume.getSummary())) {
             tips.add("Add a 3–4 line professional summary aligned to the role.");
         }
+        if (resume.getCertifications() == null || resume.getCertifications().isEmpty()) {
+            tips.add("Add a Certifications section — recruiters and ATS templates expect it for backend roles.");
+        }
         tips.add("Use bullet points with metrics (%, latency, users) — already strong in your experience.");
         tips.add("Keep one column, standard headings: Summary, Skills, Experience, Education.");
         return tips;

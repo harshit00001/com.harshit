@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: jobpulse
+      POSTGRES_USER: jobpulse
+      POSTGRES_PASSWORD: jobpulse
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jobpulse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  jobpulse:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/jobpulse
+      SPRING_DATASOURCE_USERNAME: jobpulse
+      SPRING_DATASOURCE_PASSWORD: jobpulse
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+    ports:
+      - "8090:8090"
+    volumes:
+      # Edit companies without rebuilding the image.
+      - ./config:/app/config:ro
+
+volumes:
+  postgres-data:

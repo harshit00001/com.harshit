@@ -17,6 +17,7 @@ public class ResumeDocument {
     private List<SkillCategory> skillCategories = new ArrayList<>();
     private List<ExperienceEntry> experiences = new ArrayList<>();
     private List<EducationEntry> education = new ArrayList<>();
+    private List<String> certifications = new ArrayList<>();
 
     public String getFullName() {
         return fullName;
@@ -112,5 +113,13 @@ public class ResumeDocument {
 
     public void setEducation(List<EducationEntry> education) {
         this.education = education;
+    }
+
+    public List<String> getCertifications() {
+        return certifications;
+    }
+
+    public void setCertifications(List<String> certifications) {
+        this.certifications = certifications;
     }
 }

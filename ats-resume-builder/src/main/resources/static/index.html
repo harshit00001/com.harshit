@@ -46,6 +46,10 @@
         <input id="location" style="width:100%"/>
         <label>LinkedIn URL (PDF link)</label>
         <input id="linkedinUrl" style="width:100%"/>
+        <label>Email (header)</label>
+        <input id="email" style="width:100%"/>
+        <label>Certifications (one per line)</label>
+        <textarea id="certifications" style="min-height:90px"></textarea>
         <button id="saveBtn">Save resume</button>
         <label>Preview</label>
         <pre id="preview"></pre>
@@ -63,6 +67,8 @@
         document.getElementById('title').value = resume.title || '';
         document.getElementById('location').value = resume.location || '';
         document.getElementById('linkedinUrl').value = resume.linkedinUrl || '';
+        document.getElementById('email').value = resume.email || '';
+        document.getElementById('certifications').value = (resume.certifications || []).join('\n');
         document.getElementById('preview').textContent = JSON.stringify(resume, null, 2);
     }
 
@@ -110,7 +116,10 @@
         resume.title = document.getElementById('title').value;
         resume.location = document.getElementById('location').value;
         resume.linkedinUrl = document.getElementById('linkedinUrl').value;
+        resume.email = document.getElementById('email').value;
         resume.skills = document.getElementById('skills').value.split(',').map(s => s.trim()).filter(Boolean);
+        resume.certifications = document.getElementById('certifications').value
+            .split('\n').map(s => s.trim()).filter(Boolean);
         await fetch('/api/resume', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },

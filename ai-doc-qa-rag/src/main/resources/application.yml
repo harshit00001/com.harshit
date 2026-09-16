@@ -1,0 +1,34 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: ai-doc-qa-rag
+
+rag:
+  # Point this at any folder of notes: ../jvm-gc-interview-lab works well.
+  docs-path: ./docs
+  chunk-size: 900
+  chunk-overlap: 150
+  top-k: 4
+  # Chosen with GET /api/evaluate/sweep, not guessed: 0.14 is the lowest floor that still refuses
+  # 100% of the out-of-scope questions in eval/questions.json, and a confident wrong answer costs
+  # more than a refusal. Trained embeddings score on a different scale, so re-run the sweep after
+  # switching rag.embedding-provider - do not carry this number over.
+  min-score: 0.14
+  embedding-provider: local      # local | ollama | openai
+  answer-provider: extractive    # extractive | ollama | openai
+  eval-file: ./eval/questions.json
+  ollama:
+    base-url: http://localhost:11434
+    embedding-model: nomic-embed-text
+    chat-model: llama3.2
+  openai:
+    base-url: https://api.openai.com
+    api-key: ${OPENAI_API_KEY:}
+    embedding-model: text-embedding-3-small
+    chat-model: gpt-4o-mini
+
+logging:
+  level:
+    com.harshit.docqa: INFO

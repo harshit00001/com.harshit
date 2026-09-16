@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>JobPulse — India Java Backend Vacancies</title>
+    <style>
+        :root {
+            --bg: #0f1115;
+            --panel: #171a21;
+            --panel-alt: #1e222b;
+            --border: #2a2f3a;
+            --text: #e6e9ef;
+            --muted: #9aa4b2;
+            --accent: #4f8cff;
+            --good: #2ecc71;
+            --warn: #f1c40f;
+            --bad: #e74c3c;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        header {
+            padding: 1.5rem 2rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 { margin: 0 0 .3rem; font-size: 1.5rem; }
+        header p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 290px 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem 2rem 3rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .layout { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.1rem 1.2rem;
+        }
+
+        .panel h2 {
+            margin: 0 0 .8rem;
+            font-size: .95rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--muted);
+        }
+
+        label {
+            display: block;
+            font-size: .78rem;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: var(--muted);
+            margin: .85rem 0 .3rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: .5rem .6rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--panel-alt);
+            color: var(--text);
+            font-size: .9rem;
+        }
+
+        .row { display: flex; gap: .6rem; }
+        .row > * { flex: 1; }
+
+        button {
+            margin-top: 1rem;
+            width: 100%;
+            padding: .6rem;
+            border: 0;
+            border-radius: 6px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            font-size: .9rem;
+            cursor: pointer;
+        }
+
+        button.secondary { background: var(--panel-alt); border: 1px solid var(--border); color: var(--text); }
+        button:disabled { opacity: .6; cursor: progress; }
+
+        .stats { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+
+        .stat {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: .6rem .9rem;
+            min-width: 110px;
+        }
+
+        .stat span { display: block; color: var(--muted); font-size: .72rem; text-transform: uppercase; }
+        .stat strong { font-size: 1.25rem; }
+
+        .job {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+            margin-bottom: .8rem;
+        }
+
+        .job-head { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+        .job-title { margin: 0; font-size: 1.05rem; }
+        .job-title a { color: var(--text); text-decoration: none; }
+        .job-title a:hover { color: var(--accent); }
+        .job-meta { color: var(--muted); font-size: .84rem; margin: .35rem 0 .6rem; }
+
+        .score {
+            flex-shrink: 0;
+            text-align: center;
+            border-radius: 8px;
+            padding: .35rem .6rem;
+            font-weight: 700;
+            font-size: 1rem;
+            min-width: 58px;
+        }
+
+        .score.high { background: rgba(46, 204, 113, .15); color: var(--good); }
+        .score.mid { background: rgba(241, 196, 15, .15); color: var(--warn); }
+        .score.low { background: rgba(231, 76, 60, .15); color: var(--bad); }
+
+        .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin: .5rem 0; }
+
+        .chip {
+            font-size: .74rem;
+            padding: .2rem .5rem;
+            border-radius: 20px;
+            background: rgba(79, 140, 255, .12);
+            color: #9dc0ff;
+            border: 1px solid rgba(79, 140, 255, .25);
+        }
+
+        .chip.missing { background: rgba(231, 76, 60, .1); color: #f0a49b; border-color: rgba(231, 76, 60, .25); }
+        .snippet { color: var(--muted); font-size: .84rem; line-height: 1.45; margin: .5rem 0 0; }
+        .breakdown { color: #7d8797; font-size: .74rem; margin-top: .5rem; font-family: ui-monospace, Consolas, monospace; }
+        .empty { color: var(--muted); padding: 2rem; text-align: center; }
+        .company-list { font-size: .84rem; color: var(--muted); line-height: 1.7; }
+        .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: .4rem; }
+        .dot.on { background: var(--good); }
+        .dot.off { background: #555c69; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>JobPulse</h1>
+    <p>Config-driven career page aggregator — India-only Java backend vacancies, ranked by skill match.</p>
+</header>
+
+<div class="layout">
+    <aside>
+        <div class="panel">
+            <h2>Filters</h2>
+
+            <label for="query">Keyword</label>
+            <input id="query" placeholder="e.g. microservices"/>
+
+            <label for="skills">Required skills (all must match)</label>
+            <input id="skills" placeholder="e.g. Java, Spring Boot, Kubernetes"/>
+
+            <label for="company">Company</label>
+            <select id="company"><option value="">All companies</option></select>
+
+            <label for="city">City</label>
+            <input id="city" placeholder="e.g. Pune"/>
+
+            <div class="row">
+                <div>
+                    <label for="minScore">Min score</label>
+                    <input id="minScore" type="number" min="0" max="100" value="0"/>
+                </div>
+                <div>
+                    <label for="sinceDays">Seen in (days)</label>
+                    <input id="sinceDays" type="number" min="1" placeholder="any"/>
+                </div>
+            </div>
+
+            <label for="matchedOnly">Result set</label>
+            <select id="matchedOnly">
+                <option value="false">All India postings</option>
+                <option value="true">Matched only</option>
+            </select>
+
+            <button id="searchBtn">Search</button>
+            <button id="crawlBtn" class="secondary">Re-crawl career pages</button>
+        </div>
+
+        <div class="panel" style="margin-top:1rem;">
+            <h2>Configured companies</h2>
+            <div id="companyList" class="company-list">Loading…</div>
+        </div>
+    </aside>
+
+    <main>
+        <div class="stats" id="stats"></div>
+        <div id="results"><div class="empty">Loading vacancies…</div></div>
+    </main>
+</div>
+
+<script>
+    const el = (id) => document.getElementById(id);
+
+    function scoreClass(score) {
+        if (score >= 70) return 'high';
+        if (score >= 50) return 'mid';
+        return 'low';
+    }
+
+    function escapeHtml(value) {
+        return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[char]);
+    }
+
+    async function loadStats() {
+        const response = await fetch('/api/crawl/stats');
+        const stats = await response.json();
+        el('stats').innerHTML = `
+            <div class="stat"><span>Indexed (India)</span><strong>${stats.totalIndexed}</strong></div>
+            <div class="stat"><span>Skill matched</span><strong>${stats.totalMatched}</strong></div>
+            <div class="stat"><span>Companies</span><strong>${stats.enabledCompanies}/${stats.configuredCompanies}</strong></div>`;
+    }
+
+    async function loadCompanies() {
+        const response = await fetch('/api/companies');
+        const companies = await response.json();
+
+        const select = el('company');
+        select.innerHTML = '<option value="">All companies</option>';
+        companies.filter((company) => company.enabled).forEach((company) => {
+            select.insertAdjacentHTML('beforeend',
+                `<option value="${escapeHtml(company.id)}">${escapeHtml(company.name)}</option>`);
+        });
+
+        el('companyList').innerHTML = companies.map((company) => `
+            <div>
+                <span class="dot ${company.enabled ? 'on' : 'off'}"></span>
+                ${escapeHtml(company.name)}
+                <span style="color:#6b7280">· ${escapeHtml(company.connector)}</span>
+            </div>`).join('');
+    }
+
+    function renderJobs(jobs, total) {
+        if (!jobs.length) {
+            el('results').innerHTML = '<div class="empty">No vacancies match these filters. '
+                + 'Try lowering the minimum score or removing a skill.</div>';
+            return;
+        }
+
+        const cards = jobs.map((job) => `
+            <article class="job">
+                <div class="job-head">
+                    <div>
+                        <h3 class="job-title">
+                            <a href="${escapeHtml(job.applyUrl || job.url)}" target="_blank" rel="noopener">
+                                ${escapeHtml(job.title)}
+                            </a>
+                        </h3>
+                        <div class="job-meta">
+                            ${escapeHtml(job.company)}
+                            ${job.city ? ' · ' + escapeHtml(job.city) : ''}
+                            ${job.country ? ' · ' + escapeHtml(job.country) : ''}
+                            ${job.employmentType ? ' · ' + escapeHtml(job.employmentType) : ''}
+                            ${job.postedOn ? ' · ' + escapeHtml(job.postedOn) : ''}
+                        </div>
+                    </div>
+                    <div class="score ${scoreClass(job.matchScore)}">${job.matchScore}</div>
+                </div>
+
+                <div class="chips">
+                    ${job.matchedSkills.map((skill) => `<span class="chip">${escapeHtml(skill)}</span>`).join('')}
+                    ${job.missingSkills.map((skill) => `<span class="chip missing">missing: ${escapeHtml(skill)}</span>`).join('')}
+                </div>
+
+                <p class="snippet">${escapeHtml(job.descriptionSnippet)}</p>
+                <div class="breakdown">${escapeHtml(job.scoreBreakdown || '')}</div>
+            </article>`).join('');
+
+        el('results').innerHTML =
+            `<div style="color:#9aa4b2;font-size:.85rem;margin-bottom:.7rem">Showing ${jobs.length} of ${total} matching postings</div>${cards}`;
+    }
+
+    async function search() {
+        const params = new URLSearchParams({
+            minScore: el('minScore').value || '0',
+            matchedOnly: el('matchedOnly').value,
+            size: '50'
+        });
+        if (el('query').value.trim()) params.set('q', el('query').value.trim());
+        if (el('skills').value.trim()) params.set('skills', el('skills').value.trim());
+        if (el('company').value) params.set('company', el('company').value);
+        if (el('city').value.trim()) params.set('city', el('city').value.trim());
+        if (el('sinceDays').value) params.set('sinceDays', el('sinceDays').value);
+
+        el('results').innerHTML = '<div class="empty">Searching…</div>';
+        const response = await fetch('/api/jobs/search?' + params.toString());
+        const data = await response.json();
+        renderJobs(data.jobs, data.totalElements);
+    }
+
+    el('searchBtn').onclick = search;
+
+    el('crawlBtn').onclick = async () => {
+        const button = el('crawlBtn');
+        button.disabled = true;
+        button.textContent = 'Crawling… this takes a minute';
+        try {
+            await fetch('/api/crawl/run', { method: 'POST' });
+            await loadStats();
+            await search();
+        } finally {
+            button.disabled = false;
+            button.textContent = 'Re-crawl career pages';
+        }
+    };
+
+    ['query', 'skills', 'city'].forEach((id) => {
+        el(id).addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') search();
+        });
+    });
+
+    (async function init() {
+        await loadCompanies();
+        await loadStats();
+        await search();
+    })();
+</script>
+</body>
+</html>

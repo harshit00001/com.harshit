@@ -1,0 +1,82 @@
+[
+  {
+    "question": "How does an object get promoted to the old generation?",
+    "expectedSource": "java-gc.md",
+    "note": "core tenuring question"
+  },
+  {
+    "question": "How do I tell a memory leak from allocation pressure?",
+    "expectedSource": "java-gc.md",
+    "note": "should mention live set after collection"
+  },
+  {
+    "question": "Why is a container OOMKilled while the Java heap looks fine?",
+    "expectedSource": "java-gc.md",
+    "note": "native memory vs heap"
+  },
+  {
+    "question": "What does MaxTenuringThreshold default to?",
+    "expectedSource": "java-gc.md",
+    "note": "specific fact retrieval"
+  },
+  {
+    "question": "What is the difference between exceptionally, handle and whenComplete?",
+    "expectedSource": "completable-future.md",
+    "note": "the central CompletableFuture question"
+  },
+  {
+    "question": "Why is my exception wrapped in a CompletionException?",
+    "expectedSource": "completable-future.md",
+    "note": "wrapping rule"
+  },
+  {
+    "question": "What is the difference between join and get on a CompletableFuture?",
+    "expectedSource": "completable-future.md",
+    "note": "checked vs unchecked"
+  },
+  {
+    "question": "How does allOf behave when one future fails?",
+    "expectedSource": "completable-future.md",
+    "note": "combining futures"
+  },
+  {
+    "question": "What does REQUIRES_NEW propagation do in a transaction?",
+    "expectedSource": "spring-boot-microservices.md",
+    "note": "transaction propagation"
+  },
+  {
+    "question": "How do I make a Kafka consumer idempotent?",
+    "expectedSource": "spring-boot-microservices.md",
+    "note": "at least once delivery"
+  },
+  {
+    "question": "What is the N plus 1 select problem and how is it solved?",
+    "expectedSource": "spring-boot-microservices.md",
+    "note": "JPA performance"
+  },
+  {
+    "question": "When does a circuit breaker open?",
+    "expectedSource": "spring-boot-microservices.md",
+    "note": "resilience"
+  },
+  {
+    "question": "What is the capital of France?",
+    "expectedSource": null,
+    "note": "out of scope: general knowledge the corpus does not cover"
+  },
+  {
+    "question": "How do I train a convolutional neural network on images?",
+    "expectedSource": null,
+    "note": "out of scope: adjacent technical topic not in the corpus"
+  },
+  {
+    "question": "What is my current bank account balance?",
+    "expectedSource": null,
+    "note": "out of scope: no such data indexed"
+  },
+  {
+    "question": "Give me the recipe for chicken biryani",
+    "expectedSource": null,
+    "note": "out of scope: unrelated domain"
+  }
+]

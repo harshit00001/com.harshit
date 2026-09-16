@@ -1,0 +1,5 @@
+target/
+dumps/
+*.hprof
+*.log
+gc-logs/

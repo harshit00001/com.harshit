@@ -3,102 +3,153 @@
   "title": "Software Developer",
   "location": "Pune, Maharashtra",
   "phone": "+91-7979975039",
-  "email": "rajharshit453@gmail.com",
+  "email": "rajharshit4533@gmail.com",
   "linkedin": "LinkedIn",
   "linkedinUrl": "https://www.linkedin.com/in/harshit-raj-163376199",
-  "summary": "Software Developer with 4+ years of hands-on experience building and optimizing high-quality Spring Boot microservices, RESTful APIs, and Kafka-driven workflows in Agile telecom environments. Strong in PostgreSQL, Kubernetes, GitLab CI/CD, JUnit/Mockito, and React.js. Focused on clean, scalable OSS/BSS delivery for Telstra and Bell Canada with measurable quality, automation, and performance gains.",
+  "summary": "Software Developer with 4+ years of experience designing and delivering scalable, distributed microservices using Java 8/17, Spring Boot, and Spring Data JPA. Proven expertise in building RESTful APIs, event-driven and asynchronous workflows with Apache Kafka, and containerized deployments on Docker and Kubernetes. Skilled in system design (HLD/LLD), SQL and query optimization, performance tuning, and CI/CD automation with GitLab and Jenkins. Strong collaborator in Agile telecom OSS/BSS delivery for Telstra and Bell Canada. Actively seeking a Backend / Java Developer role to build high-performance, cloud-native applications.",
   "skills": [
-    "Java",
+    "Java 8/17",
+    "Spring Boot",
+    "Spring MVC",
+    "Spring Security",
+    "Spring Data JPA",
+    "Hibernate",
     "SQL",
     "Python",
-    "Spring Boot",
-    "Spring Security",
-    "RESTful APIs",
-    "Microservices",
-    "Spring Data JPA",
-    "Kafka",
-    "JUnit",
-    "Mockito",
     "JWT",
+    "XML",
     "React.js",
+    "Microservices",
+    "RESTful APIs",
+    "Event-Driven Architecture",
+    "Asynchronous Processing",
+    "Service Orchestration",
+    "Distributed Systems",
+    "System Design (HLD/LLD)",
+    "SOLID Principles",
+    "Design Patterns",
     "PostgreSQL",
     "MySQL",
+    "Apache Kafka",
     "Redis",
     "MongoDB",
-    "AWS",
+    "Caching",
+    "Query Optimization",
+    "Connection Pooling",
     "Docker",
     "Kubernetes",
+    "AWS",
     "Jenkins",
-    "CI/CD",
-    "XML",
+    "GitLab CI/CD",
+    "CI/CD Pipelines",
+    "Git",
+    "Maven",
+    "Apigee",
+    "JUnit",
+    "Mockito",
     "Serenity BDD",
     "SoapUI",
-    "Distributed Systems",
-    "HLD",
-    "LLD",
-    "Maven",
-    "Git",
-    "GitLab",
-    "Jira",
-    "Splunk",
-    "Apigee",
+    "Postman",
+    "Swagger/OpenAPI",
     "SonarQube",
-    "Data Structures and Algorithms",
+    "Splunk",
+    "Jira",
     "GenAI",
+    "Model Context Protocol (MCP)",
+    "GitHub Copilot",
     "Cursor",
-    "MCP",
-    "Tabnine",
-    "Copilot"
+    "Agile/Scrum",
+    "Root Cause Analysis",
+    "Production Support",
+    "Code Reviews",
+    "Technical Documentation",
+    "Data Structures and Algorithms"
   ],
   "skillCategories": [
     {
-      "label": "Languages",
-      "items": ["Java", "SQL", "Python"]
-    },
-    {
-      "label": "Backend & Frameworks",
+      "label": "Languages & Frameworks",
       "items": [
+        "Java 8/17",
         "Spring Boot",
+        "Spring MVC",
         "Spring Security",
-        "RESTful APIs",
-        "Microservices",
         "Spring Data JPA",
-        "Kafka",
-        "JUnit",
-        "Mockito",
+        "Hibernate",
+        "SQL",
+        "Python",
         "JWT",
-        "React.js",
-        "XML"
+        "XML",
+        "React.js"
       ]
     },
     {
-      "label": "Search / Data / Infra",
-      "items": ["PostgreSQL", "MySQL", "Apache Kafka", "Redis", "MongoDB"]
-    },
-    {
-      "label": "Cloud / DevOps",
-      "items": ["AWS", "Docker", "Kubernetes", "Jenkins", "CI/CD", "GitLab"]
-    },
-    {
-      "label": "Tools & Other",
+      "label": "Architecture & Design",
       "items": [
+        "Microservices",
+        "RESTful APIs",
+        "Event-Driven Architecture",
+        "Asynchronous Processing",
+        "Service Orchestration",
+        "Distributed Systems",
+        "System Design (HLD/LLD)",
+        "SOLID Principles",
+        "Design Patterns"
+      ]
+    },
+    {
+      "label": "Data & Messaging",
+      "items": [
+        "PostgreSQL",
+        "MySQL",
+        "Apache Kafka",
+        "Redis",
+        "MongoDB",
+        "Caching",
+        "Query Optimization",
+        "Connection Pooling"
+      ]
+    },
+    {
+      "label": "DevOps & Cloud",
+      "items": [
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "Jenkins",
+        "GitLab CI/CD",
+        "CI/CD Pipelines",
+        "Git",
+        "Maven",
+        "Apigee"
+      ]
+    },
+    {
+      "label": "Testing, Tools & AI",
+      "items": [
+        "JUnit",
+        "Mockito",
         "Serenity BDD",
         "SoapUI",
-        "Distributed Systems",
-        "HLD",
-        "LLD",
-        "Maven",
-        "Git",
-        "Jira",
-        "Splunk",
-        "Apigee",
+        "Postman",
+        "Swagger/OpenAPI",
         "SonarQube",
-        "Data Structures and Algorithms",
+        "Splunk",
+        "Jira",
         "GenAI",
-        "Cursor",
-        "MCP",
-        "Tabnine",
-        "Copilot"
+        "Model Context Protocol (MCP)",
+        "GitHub Copilot",
+        "Cursor"
+      ]
+    },
+    {
+      "label": "Methodologies",
+      "items": [
+        "Agile/Scrum",
+        "Root Cause Analysis",
+        "Production Support",
+        "Code Reviews",
+        "Technical Documentation",
+        "Data Structures and Algorithms"
       ]
     }
   ],
@@ -106,65 +157,56 @@
     {
       "role": "Software Developer",
       "company": "Amdocs",
-      "location": "Pune, Maharashtra",
+      "location": "Pune, India",
       "startDate": "Jan 2026",
       "endDate": "Present",
       "client": "Bell Canada",
       "bullets": [
-        "Built a Spring Boot microservice generating XML offer catalogs consumed by a downstream provisioning system to onboard 1,100+ roaming offers, price plans, and entitlements for enterprise subscribers.",
-        "Delivered 8+ features covering flat-rate offer generation and active-plan eligibility validation, cutting invalid catalog output by 22% and centralizing error handling, KPI tracking, and audit logging via a shared validation utility.",
-        "Authored 100+ JUnit and Serenity BDD tests via GitLab CI/CD with feature-toggle rollout, reaching 85%+ coverage across all plan flows."
+        "Built a Spring Boot microservice that generates XML offer catalogs consumed by a downstream provisioning system, onboarding 1,100+ roaming offers, price plans, and entitlements for enterprise subscribers.",
+        "Delivered 8+ features covering flat-rate offer generation and active-plan eligibility validation, cutting invalid catalog output by 22% and centralizing error handling, KPI tracking, and audit logging in a shared validation utility.",
+        "Authored 100+ JUnit and Serenity BDD tests wired into GitLab CI/CD with feature-toggle rollout, reaching 85%+ code coverage across all plan flows.",
+        "Collaborated with architects and product owners on low-level design, effort estimation, code reviews, and risk analysis for every sprint release."
       ]
     },
     {
       "role": "Software Developer",
       "company": "Amdocs",
-      "location": "Pune, Maharashtra",
+      "location": "Pune, India",
       "startDate": "Jan 2024",
       "endDate": "Dec 2025",
       "client": "Telstra",
       "bullets": [
-        "Developed and maintained 20+ Spring Boot microservices using PostgreSQL for telecom OSS platforms, supporting 100K+ daily service orders through Kafka-based orchestration and automated order fulfillment.",
-        "Enhanced the Service Order Management (SOM) platform, improving end-to-end order processing efficiency by 30%, and led the migration of 30+ REST APIs to a new Apigee API Management platform.",
-        "Architected a robust inventory management module featuring advanced filtering and pagination, directly improving data retrieval efficiency by 40% for key users.",
-        "Improved application performance by 25–35% through SQL query optimization, connection pooling, caching, and performance tuning.",
-        "Deployed and managed 15+ containerized microservices on Kubernetes, achieving 99.99% application availability, and optimized the Parallel MEC Distribution process, reducing deployment time by 50%.",
-        "Built a SoapUI automation framework that reduced manual testing effort by 40% and execution time by 60%, while collaborating on 30+ features and 10+ production releases in an Agile environment."
+        "Developed and maintained 20+ Spring Boot microservices on PostgreSQL for telecom OSS platforms, supporting 100K+ daily service orders through Kafka-based event-driven orchestration and automated order fulfilment.",
+        "Enhanced the Service Order Management (SOM) platform, improving end-to-end order processing efficiency by 30%, and led the migration of 30+ REST APIs to a new Apigee API management platform with updated security policies.",
+        "Architected an inventory management module with advanced filtering and pagination, improving data retrieval efficiency by 40% for key business users.",
+        "Improved application performance by 25–35% through SQL query optimization, indexing, connection pooling, Redis caching, and JVM-level performance tuning.",
+        "Deployed and managed 15+ containerized microservices on Kubernetes, achieving 99.99% availability and cutting deployment time by 50% by optimizing the Parallel MEC Distribution process.",
+        "Built a SoapUI automation framework that reduced manual testing effort by 40% and execution time by 60%, while delivering 30+ features across 10+ production releases in an Agile environment."
       ]
     },
     {
       "role": "Software Engineering Associate",
       "company": "Amdocs",
-      "location": "Pune, Maharashtra",
+      "location": "Pune, India",
       "startDate": "Jul 2022",
       "endDate": "Dec 2023",
       "client": "Telstra",
       "bullets": [
-        "Developed AMEND and CANCEL functionalities for the Complex Logistics Microservice, enhancing telecom order lifecycle management.",
-        "Resolved 200+ defects across SIT and UAT environments while achieving 100% security compliance by fixing SonarQube and Docker vulnerabilities.",
-        "Increased JUnit test coverage from 30% to over 80%, ensuring high code quality with minimal duplication and zero critical production defects.",
-        "Delivered 30+ features with cross-functional Agile teams through root cause analysis and on-time release execution."
-      ]
-    },
-    {
-      "role": "Project Trainee",
-      "company": "Amdocs",
-      "location": "Pune, Maharashtra",
-      "startDate": "Feb 2022",
-      "endDate": "May 2022",
-      "bullets": [
-        "Completed a focused internship on enterprise software delivery workflows and production readiness practices.",
-        "Developed an internal product management system using JSP, Servlets, MySQL, HTML, CSS, and JavaScript."
+        "Developed AMEND and CANCEL functionality for the Complex Logistics microservice, extending telecom order lifecycle management across multiple lines of business.",
+        "Resolved 200+ defects across SIT and UAT through root cause analysis, and reached 100% security compliance by remediating SonarQube and Docker vulnerabilities.",
+        "Increased JUnit and Mockito test coverage from 30% to over 80%, cutting critical production defects to zero and reducing technical debt by 40%.",
+        "Delivered 30+ features with cross-functional Agile teams, sustaining sprint completion rates above 90% and on-time release execution."
       ]
     }
   ],
   "education": [
     {
-      "degree": "Master of Computer Application — CGPA 9.02",
+      "degree": "Master of Computer Applications (MCA), Computer Science | CGPA 9.02",
       "institution": "Birla Institute of Technology, Mesra",
       "startDate": "2020",
       "endDate": "2022",
       "details": "Ranchi, India"
     }
-  ]
+  ],
+  "certifications": []
 }

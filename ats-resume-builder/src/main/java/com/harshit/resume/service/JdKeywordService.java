@@ -99,6 +99,9 @@ public class JdKeywordService {
                 sb.append(ed.getDegree()).append(' ').append(ed.getInstitution()).append(' ');
             });
         }
+        if (resume.getCertifications() != null) {
+            sb.append(String.join(" ", resume.getCertifications())).append(' ');
+        }
         return sb.toString().toLowerCase(Locale.ROOT);
     }
 }

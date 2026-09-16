@@ -1,0 +1,204 @@
+server:
+  port: 8092
+
+spring:
+  application:
+    name: jobpulse
+  # Companies live in an external file so they can be edited without rebuilding.
+  config:
+    import: optional:file:./config/companies.yml
+  datasource:
+    url: jdbc:h2:file:./data/jobpulse;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 30
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.harshit.jobpulse: INFO
+
+jobpulse:
+  crawl:
+    schedule-enabled: true
+    run-on-startup: true
+    # Every 12 hours. Career pages do not change minute to minute.
+    cron: "0 0 */12 * * *"
+    request-delay-millis: 400
+    connect-timeout-seconds: 15
+    read-timeout-seconds: 40
+    max-retries: 2
+
+  # India-only gate, applied before scoring.
+  location-filter:
+    enabled: true
+    keep-unknown-locations: false
+    countries:
+      - India
+      - Bharat
+    cities:
+      - bengaluru
+      - bangalore
+      - pune
+      - hyderabad
+      - chennai
+      - mumbai
+      - navi mumbai
+      - thane
+      - delhi
+      - new delhi
+      - noida
+      - greater noida
+      - gurgaon
+      - gurugram
+      - kolkata
+      - kochi
+      - cochin
+      - indore
+      - ahmedabad
+      - gandhinagar
+      - jaipur
+      - coimbatore
+      - mysore
+      - mysuru
+      - trivandrum
+      - thiruvananthapuram
+      - nagpur
+      - bhubaneswar
+      - chandigarh
+      - vadodara
+      - visakhapatnam
+      - vizag
+      - goa
+      - lucknow
+      - bhopal
+      - nashik
+    blocked-countries:
+      - United States
+      - United Kingdom
+      - Canada
+      - Australia
+      - Mexico
+      - Philippines
+      - Singapore
+      - Japan
+      - China
+      - Germany
+      - France
+      - Spain
+      - Brazil
+      - Argentina
+      - Poland
+      - Romania
+      - Ireland
+      - Netherlands
+      - Sweden
+      - Italy
+      - Portugal
+      - Malaysia
+      - Indonesia
+      - Thailand
+      - South Africa
+      - New Zealand
+      - United Arab Emirates
+      - Saudi Arabia
+
+  profile:
+    min-score: 55
+    min-must-have-matches: 2
+    target-roles:
+      - java developer
+      - java backend
+      - backend developer
+      - backend engineer
+      - software engineer
+      - software developer
+      - microservices
+      - senior software engineer
+      - full stack developer
+      - application developer
+      - custom software engineer
+      - java full stack
+    must-have-skills:
+      - Java
+      - Spring Boot
+      - Microservices
+      - SQL
+      - REST APIs
+    nice-to-have-skills:
+      - Docker
+      - Kubernetes
+      - Kafka
+      - PostgreSQL
+      - Redis
+      - MongoDB
+      - AWS
+      - Azure
+      - GCP
+      - JUnit
+      - Mockito
+      - Hibernate
+      - Maven
+      - Git
+      - CI/CD
+      - Jenkins
+      - GraphQL
+      - Elasticsearch
+      - Terraform
+      - React
+    exclude-title-keywords:
+      - intern
+      - internship
+      - fresher
+      - trainee
+      - apprentice
+      - recruiter
+      - sales
+      - accountant
+      - .net developer
+    aliases:
+      Java: [java, core java, java8, jdk, j2ee, jakarta ee]
+      "Spring Boot": [spring boot, springboot, spring-boot, spring framework, spring mvc]
+      Microservices: [microservice, microservices, micro-service, micro services]
+      SQL: [sql, plsql, pl/sql, t-sql, rdbms, relational database]
+      "REST APIs": [rest, restful, rest api, rest apis, web services, api development]
+      Docker: [docker, containerization, containerisation]
+      Kubernetes: [kubernetes, k8s, openshift, eks, aks, gke]
+      Kafka: [kafka, apache kafka, event streaming]
+      PostgreSQL: [postgresql, postgres, psql]
+      Redis: [redis]
+      MongoDB: [mongodb, mongo]
+      AWS: [aws, amazon web services]
+      Azure: [azure, microsoft azure]
+      GCP: [gcp, google cloud]
+      JUnit: [junit]
+      Mockito: [mockito]
+      Hibernate: [hibernate, jpa, spring data jpa]
+      Maven: [maven, gradle]
+      Git: [git, github, gitlab, bitbucket]
+      "CI/CD": [ci/cd, cicd, continuous integration, continuous delivery, devops pipeline]
+      Jenkins: [jenkins]
+      GraphQL: [graphql]
+      Elasticsearch: [elasticsearch, elastic search, opensearch]
+      Terraform: [terraform]
+      React: [react, react.js, reactjs]

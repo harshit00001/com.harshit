@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Q&A (RAG)</title>
+    <style>
+        :root { --bg:#0f1115; --panel:#181b22; --line:#272b34; --text:#e6e8ec; --muted:#9aa2af; --accent:#6ea8fe; }
+        * { box-sizing: border-box; }
+        body { margin:0; background:var(--bg); color:var(--text);
+               font:15px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+        .wrap { max-width: 880px; margin: 0 auto; padding: 32px 20px 64px; }
+        h1 { font-size: 22px; margin: 0 0 4px; }
+        .sub { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+        .panel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:18px; margin-bottom:16px; }
+        .row { display:flex; gap:10px; }
+        input[type=text] { flex:1; padding:11px 13px; border-radius:8px; border:1px solid var(--line);
+                           background:#11141a; color:var(--text); font-size:15px; }
+        button { padding:11px 18px; border:0; border-radius:8px; background:var(--accent); color:#0b1020;
+                 font-weight:600; cursor:pointer; font-size:14px; }
+        button.ghost { background:transparent; border:1px solid var(--line); color:var(--text); font-weight:500; }
+        button:disabled { opacity:.5; cursor:default; }
+        .answer { white-space:pre-wrap; }
+        .refused { color:#ffb4a2; }
+        .meta { color:var(--muted); font-size:12.5px; margin-top:12px; display:flex; flex-wrap:wrap; gap:14px; }
+        .cite { border-left:3px solid var(--line); padding:8px 12px; margin-top:10px; }
+        .cite .src { color:var(--accent); font-size:13px; font-weight:600; }
+        .cite .ex { color:var(--muted); font-size:13px; }
+        .badge { display:inline-block; padding:2px 8px; border-radius:99px; font-size:11.5px;
+                 border:1px solid var(--line); color:var(--muted); }
+        .examples { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+        .examples span { cursor:pointer; font-size:12.5px; color:var(--muted);
+                         border:1px solid var(--line); border-radius:99px; padding:4px 10px; }
+        .examples span:hover { color:var(--text); border-color:var(--accent); }
+        pre { background:#11141a; border:1px solid var(--line); border-radius:8px; padding:12px;
+              overflow:auto; font-size:12.5px; color:var(--muted); }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>Document Q&amp;A <span class="badge">retrieval-augmented generation</span></h1>
+    <div class="sub">Answers come only from the indexed documents, with citations. If nothing is similar enough, the service refuses instead of guessing.</div>
+
+    <div class="panel">
+        <div class="row">
+            <input type="text" id="question" placeholder="Ask something about the indexed notes..."
+                   onkeydown="if(event.key==='Enter')ask()">
+            <button id="askBtn" onclick="ask()">Ask</button>
+        </div>
+        <div class="examples">
+            <span onclick="fill(this)">How does an object get promoted to the old generation?</span>
+            <span onclick="fill(this)">What is the difference between exceptionally, handle and whenComplete?</span>
+            <span onclick="fill(this)">How do I make a Kafka consumer idempotent?</span>
+            <span onclick="fill(this)">What is the capital of France?</span>
+        </div>
+    </div>
+
+    <div class="panel" id="result" style="display:none"></div>
+
+    <div class="panel">
+        <div class="row">
+            <button class="ghost" onclick="loadDocs()">Indexed documents</button>
+            <button class="ghost" onclick="reindex()">Re-index</button>
+            <button class="ghost" onclick="evaluate()">Run evaluation</button>
+        </div>
+        <pre id="tools" style="display:none"></pre>
+    </div>
+</div>
+
+<script>
+    function fill(el) {
+        document.getElementById('question').value = el.textContent;
+        ask();
+    }
+
+    async function ask() {
+        const question = document.getElementById('question').value.trim();
+        if (!question) return;
+        const btn = document.getElementById('askBtn');
+        const box = document.getElementById('result');
+        btn.disabled = true;
+        box.style.display = 'block';
+        box.innerHTML = '<span class="ex">thinking...</span>';
+
+        try {
+            const res = await fetch('/api/ask', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({question})
+            });
+            render(await res.json());
+        } catch (e) {
+            box.innerHTML = '<span class="refused">request failed: ' + e.message + '</span>';
+        } finally {
+            btn.disabled = false;
+        }
+    }
+
+    function render(r) {
+        const box = document.getElementById('result');
+        let html = '<div class="answer' + (r.answered ? '' : ' refused') + '">'
+            + escapeHtml(r.answer) + '</div>';
+
+        if (r.injectionSuspected) {
+            html += '<div class="meta"><span class="refused">prompt-injection phrasing detected in retrieved context</span></div>';
+        }
+
+        html += '<div class="meta">'
+            + '<span>' + (r.answered ? 'answered' : 'refused') + ': ' + escapeHtml(r.reason) + '</span>'
+            + '<span>top similarity ' + r.topScore.toFixed(3) + '</span>'
+            + '<span>' + r.latencyMillis + ' ms</span>'
+            + '</div>'
+            + '<div class="meta"><span>embeddings: ' + escapeHtml(r.embeddingProvider) + '</span>'
+            + '<span>answerer: ' + escapeHtml(r.answerProvider) + '</span></div>';
+
+        if (r.citations && r.citations.length) {
+            html += '<div style="margin-top:14px;font-size:13px;color:var(--muted)">Retrieved passages</div>';
+            r.citations.forEach(c => {
+                html += '<div class="cite"><div class="src">' + escapeHtml(c.source)
+                    + (c.heading ? ' &rsaquo; ' + escapeHtml(c.heading) : '')
+                    + ' <span class="badge">' + c.similarity.toFixed(3) + '</span></div>'
+                    + '<div class="ex">' + escapeHtml(c.excerpt) + '</div></div>';
+            });
+        }
+        box.innerHTML = html;
+    }
+
+    async function show(url, options) {
+        const pre = document.getElementById('tools');
+        pre.style.display = 'block';
+        pre.textContent = 'loading...';
+        const res = await fetch(url, options);
+        pre.textContent = JSON.stringify(await res.json(), null, 2);
+    }
+
+    const loadDocs = () => show('/api/documents');
+    const reindex = () => show('/api/index', {method: 'POST'});
+    const evaluate = () => show('/api/evaluate');
+
+    function escapeHtml(s) {
+        return (s ?? '').replace(/[&<>"']/g, c =>
+            ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    }
+</script>
+</body>
+</html>
